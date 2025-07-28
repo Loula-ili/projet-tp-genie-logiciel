@@ -1,0 +1,19 @@
+name: John Smith
+skills:
+  c: 90
+  c++: 70
+  java: 50
+experience:
+  Google:
+    start: 2005
+    end: 2010
+    keywords:
+      - c
+      - c++
+      - java
+  Facebook:
+    start: 2010
+    end: 2021
+    keywords:
+      - Python
+      - PHP
