@@ -165,6 +165,7 @@ git grep -h '\[BAREME: [^]]*\]' | sed 's/^[#-]*\s*//' | sort | sed 's/^\(.*\)\[B
 | 1 | Outillage : au moins une issue fermée dans GitLab  |
 | 1 | Outillage : au moins une merge-request fermée sur GitLab  |
 | 1 | Outillage : fichiers ignorés avec .gitignore  |
+| Malus -1 | Outillage : Pas de fichiers trackés par git (git add) dans le répertoire target/ |
 | 1 | Outillage : intégration continue OK sur GitLab  |
 | 1 | Outillage : les tests passent (mvn test -Dcheckstyle.skip)  |
 | 3 | Outillage : tests unitaires (automatiques) du projet  |

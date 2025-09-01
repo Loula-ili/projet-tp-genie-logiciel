@@ -134,6 +134,10 @@ git rm -r target/
 git commit -m "Suppression du répertoire target/, qui n'aurait jamais du être ajouté"
 ```
 
+<!--
+Outillage : Pas de fichiers trackés par git (git add) dans le répertoire target/ [BAREME: malus -1pt]
+-->
+
 #### Outillage : fichiers ignorés avec .gitignore [BAREME: 1]
 
 Depuis l'interface web de la forge, créez une nouvelle demande

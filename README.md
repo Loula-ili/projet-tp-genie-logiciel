@@ -66,16 +66,10 @@ email, ce fichier en contient une copie.
 * Énoncé : [TP1-java/README.md](TP1-java/README.md)
 
 * Salles :
-    - Nautibus TD001
-    - Nautibus TD005
-    - Nautibus TP101
-    - Nautibus TP103
-    - Nautibus TP105
-    - Nautibus TP109
-    - Nautibus TP114
-    - Nautibus TP115
-    - Nautibus TD116
-    - Nautibus TP123
+    -                                                                Matthieu Moy circule entre les salles
+    - Nautibus TD001, Nautibus TD005, Nautibus TP101                 : Abdelhakim Boudraa
+    - Nautibus TP103, Nautibus TP105, Nautibus TP109                 : Ryan Horache
+    - Nautibus TP114, Nautibus TP115, Nautibus TD116, Nautibus TP123 : Lionel Medini
 
 
 ## CM 2 (vendredi 5/9/2025, 9h45) : Outillage : Maven, la forge Gitlab, intégration continue, coding style ... 
@@ -92,16 +86,10 @@ email, ce fichier en contient une copie.
 * Énoncé : [TP2-outils/README.md](TP2-outils/README.md)
 
 * Salles :
-    - Nautibus TD001
-    - Nautibus TD005
-    - Nautibus TP103
-    - Nautibus TP105
-    - Nautibus TP107
-    - Nautibus TP108
-    - Nautibus TP109
-    - Nautibus TD116
-    - Nautibus TD124
-    - Nautibus TD126
+    -                                                                Matthieu Moy circule entre les salles
+    - Nautibus TD001, Nautibus TD005, Nautibus TP103                 : Abdelhakim Boudraa
+    - Nautibus TP105, Nautibus TP107, Nautibus TP108                 : Ryan Horache
+    - Nautibus TP109, Nautibus TD116, Nautibus TD124, Nautibus TD126 : Lionel Medini
 
 
 ## CM 3 (mardi 9/9/2025, 14h00, par Lionel Medini) : Coding style, Design patterns (début)

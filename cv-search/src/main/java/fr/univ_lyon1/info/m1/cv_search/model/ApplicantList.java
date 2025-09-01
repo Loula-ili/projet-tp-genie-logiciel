@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Wrapper around List<Applicant> implementing the observer pattern.
+ * Wrapper around {@link List<Applicant>} implementing the observer pattern.
  */
 public class ApplicantList implements Iterable<Applicant>
 //TODO: checkstyle will (rightfully) complain about this brace. Make sure it does, and then fix it.
