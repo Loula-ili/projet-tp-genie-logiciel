@@ -66,7 +66,7 @@ email, ce fichier en contient une copie.
 * Énoncé : [TP1-java/README.md](TP1-java/README.md)
 
 * Salles :
-    -                                                                Matthieu Moy circule entre les salles
+    - Matthieu Moy circule entre les salles
     - Nautibus TD001, Nautibus TD005, Nautibus TP101                 : Abdelhakim Boudraa
     - Nautibus TP103, Nautibus TP105, Nautibus TP109                 : Ryan Horache
     - Nautibus TP114, Nautibus TP115, Nautibus TD116, Nautibus TP123 : Lionel Medini
@@ -86,7 +86,7 @@ email, ce fichier en contient une copie.
 * Énoncé : [TP2-outils/README.md](TP2-outils/README.md)
 
 * Salles :
-    -                                                                Matthieu Moy circule entre les salles
+    - Matthieu Moy circule entre les salles
     - Nautibus TD001, Nautibus TD005, Nautibus TP103                 : Abdelhakim Boudraa
     - Nautibus TP105, Nautibus TP107, Nautibus TP108                 : Ryan Horache
     - Nautibus TP109, Nautibus TD116, Nautibus TD124, Nautibus TD126 : Lionel Medini
