@@ -24,7 +24,7 @@ grep '^## .. ' README.md | sed 's/[^(]*(//; s/,.*//' | while read line; do echo 
 
 * Session 2 : mêmes consignes que pour la session 1, sauf la durée qui sera 1h plus tiers-temps.
 
-Barème : 40% examen / 10% QCM en amphi / 50% TP (une note pour le rapport, une note pour le code). Seul l'examen est rattrapable en session 2.
+Barème : 40% examen / 10% QCM en amphi / 50% TP (une note pour le rapport, une note pour le code). Les absences sont remplacées par la note 0/20. La session 2 remplace l'examen **ou** le QCM (la note retenue est le maximum des moyennes en remplaçant l'examen ou le QCM par la session 2).
 
 ## Enseignants et contacts
 

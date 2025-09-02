@@ -49,8 +49,11 @@ pouvez utiliser l'OS de votre choix.
 Sur les machines du Nautibus, les TPs ont été testés sous Linux, en
 utilisant l'environnement Java par défaut (sans rien configurer).
 
-<!--
 #### UNIQUEMENT en cas de problème avec l'environnement par défaut
+
+Le 2 septembre 2025, mvn n'est pas encore installé sur les ordinateurs du
+Nautibus (ce devrait être résolu bientôt). Voici un contournement (l'autre est
+d'installer Maven sur votre compte).
 
 En cas de besoin, il y a aussi une version installée pour vous dans
 `/home/tpetu/m1if01/` (à une époque où la version par défaut posait
@@ -63,12 +66,11 @@ Puis rechargez le fichier (`exec bash` par exemple). Vérifiez que vous
 obtenez bien :
 
     $ which java
-    /home/tpetu/m1if01/bin/java
+    /usr/bin/java
     $ which javac
-    /home/tpetu/m1if01/bin/javac
+    /usr/bin/javac
     $ which mvn
     /home/tpetu/m1if01/bin/mvn
--->
 
 ### Sur vos machines personnelles
 
