@@ -401,7 +401,7 @@ votre installation si besoin) :
 Sous Linux avec le package `openjfx` (nom du paquet pour la distribution Ubuntu, à adapter pour les autres distributions) installé :
 
 ```sh
-java --module-path /usr/share/openjfx/lib --add-modules=javafx.controls -jar target/y-microblogging-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+java --module-path /usr/share/openjfx/lib --add-modules=javafx.controls -jar target/cv-search-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 ```
 
 Ce fichier `.jar` est donc indépendant de Maven, en utilisation réelle on
