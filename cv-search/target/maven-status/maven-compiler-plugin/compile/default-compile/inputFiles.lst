@@ -1,0 +1,6 @@
+/home/ilicia/mif-01-g-logiciel/cv-search/src/main/java/fr/univ_lyon1/info/m1/cv_search/App.java
+/home/ilicia/mif-01-g-logiciel/cv-search/src/main/java/fr/univ_lyon1/info/m1/cv_search/model/Applicant.java
+/home/ilicia/mif-01-g-logiciel/cv-search/src/main/java/fr/univ_lyon1/info/m1/cv_search/model/ApplicantBuilder.java
+/home/ilicia/mif-01-g-logiciel/cv-search/src/main/java/fr/univ_lyon1/info/m1/cv_search/model/ApplicantList.java
+/home/ilicia/mif-01-g-logiciel/cv-search/src/main/java/fr/univ_lyon1/info/m1/cv_search/model/ApplicantListBuilder.java
+/home/ilicia/mif-01-g-logiciel/cv-search/src/main/java/fr/univ_lyon1/info/m1/cv_search/view/JfxView.java
