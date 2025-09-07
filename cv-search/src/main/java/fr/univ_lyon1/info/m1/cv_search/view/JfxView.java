@@ -16,11 +16,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-
 /**
  * Main view of the application, implemented using JavaFX.
  */
 public class JfxView {
+
     private HBox searchSkillsBox;
     private VBox resultBox;
 
@@ -39,7 +39,6 @@ public class JfxView {
         Node searchSkillsBox = createCurrentSearchSkillsWidget();
         root.getChildren().add(searchSkillsBox);
 
-
         Node search = createSearchWidget();
         root.getChildren().add(search);
 
@@ -51,7 +50,6 @@ public class JfxView {
         stage.setScene(scene);
         stage.show();
     }
-
 
     /**
      * Create the text field to enter a new skill.
@@ -109,14 +107,14 @@ public class JfxView {
                 // TODO: This code is unacceptably dirty!
                 // TODO: You MUST rewrite it for the final version.
                 ApplicantList listApplicants
-                    = new ApplicantListBuilder(new File(".")).build();
+                        = new ApplicantListBuilder(new File(".")).build();
                 resultBox.getChildren().clear();
                 for (Applicant a : listApplicants) {
                     boolean selected = true;
                     // TODO: OMG, don't ever do that ...
                     for (Node skill : searchSkillsBox.getChildren()) {
                         String skillName = ((Button) skill).getText();
-                        if (a.getSkill(skillName) < 50) {
+                        if (a.getSkill(skillName) < 60) {
                             selected = false;
                             break;
                         }
@@ -131,8 +129,7 @@ public class JfxView {
     }
 
     /**
-     * Create the widget showing the list of skills currently searched
-     * for.
+     * Create the widget showing the list of skills currently searched for.
      */
     private Node createCurrentSearchSkillsWidget() {
         searchSkillsBox = new HBox();
