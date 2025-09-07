@@ -227,7 +227,7 @@ public class JfxView {
     }
 
     /**
-     * Create the widget showing the list of skills currently searched for.
+     * Create the widget showing the list of skills currently searched for
      */
     private Node createCurrentSearchSkillsWidget() {
         searchSkillsBox = new HBox();
