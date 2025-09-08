@@ -126,7 +126,7 @@ la page d'accueil du cours.
 **Ajoutez les utilisateurs @matthieu.moy, @LIONEL.MEDINI avec le niveau de privilège
 "reporter" (ou plus, mais *pas* "guest") à votre projet sur la forge**
 
-Dans la feuille TOMUSS M1 Informatique, indiquez l'URL de votre projet dans la case URL_Projet_MIF01 (l'URL doit ressembler à
+Dans la feuille TOMUSS de l'UE « Gestion de projet et Génie Logiciel », indiquez l'URL de votre projet dans la case `URL_Projet` (l'URL doit ressembler à
 `https://forge.univ-lyon1.fr/<login>/mif01`). Il faut impérativement
 **que la commande `git clone <url>` fonctionne, et que cette commande récupère la dernière version de votre projet.**
 Autrement dit la branche par défaut doit contenir la dernière version du projet si vous avez
