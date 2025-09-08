@@ -20,4 +20,4 @@ junit:
     # Useful only for debugging
     #- cat ~/.m2/settings.xml
   script:
-    - echo "Continuous integration not set up"; exit 1
+    - cd cv-search && mvn test --batch-mode
