@@ -8,7 +8,7 @@ import java.util.Map;
 import org.yaml.snakeyaml.Yaml;
 
 /**
- * Builder reading a Yaml file to build an Applicant object.
+ * Builder reading a Yaml file to build an applicant object.
  */
 public class ApplicantBuilder {
 
