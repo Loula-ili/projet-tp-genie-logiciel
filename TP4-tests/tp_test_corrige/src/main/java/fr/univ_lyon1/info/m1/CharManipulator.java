@@ -17,14 +17,14 @@ public class CharManipulator implements ICharManipulator {
 	String res = input;
 	String oldres = "";
 	while (res != oldres) {
-	    oldres = res;
-	    res = res.replace(pattern, "");
+		oldres = res;
+		res = res.replace(pattern, "");
 	}
 	return res;
     }
     
     public String invertCase(String string) {
-	throw new UnsupportedOperationException("invertCase"); // TODO
+	throw new UnsupportedOperationException("invertCase");
     }
 
 }

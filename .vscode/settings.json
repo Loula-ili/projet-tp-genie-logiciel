@@ -1,0 +1,3 @@
+{
+    "java.checkstyle.configuration": "${workspaceFolder}/cv-search/src/main/config/checkstyle.xml"
+}

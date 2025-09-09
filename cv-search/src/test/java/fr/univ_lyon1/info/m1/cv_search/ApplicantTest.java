@@ -1,5 +1,4 @@
 package fr.univ_lyon1.info.m1.cv_search;
-
 import java.io.File;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -29,9 +28,8 @@ public class ApplicantTest {
         // Then
         assertThat(70, is(a.getSkill("c++")));
         assertThat("John Smith", is(a.getName()));
-        // TODO: Obviously incorrect, hence should fail.
-        // TODO: Make sure it does and remove this buggy assertion.
-        assertThat(2 + 2, is(5));
+        
+        assertThat(2 + 2, is(4));
     }
 
     /** Check that the builder can read several files in the same directory. */

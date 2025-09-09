@@ -10,7 +10,8 @@ public class ApplicantListBuilder {
     private File directory;
 
     /**
-     * @param directory Directory where Yaml files for applicants should be searched.
+     * @param directory Directory where Yaml files for applicants should be
+     *                  searched.
      */
     public ApplicantListBuilder(final File directory) {
         this.directory = directory;

@@ -18,7 +18,8 @@ public class Applicant {
     }
 
     /**
-     * Assign score {@param value} to skill {@param skillName} for the current applicant.
+     * Assign score {@param value} to skill {@param skillName} for the current
+     * applicant.
      */
     public void setSkill(final String skillName, final int value) {
         skills.put(skillName, value);
