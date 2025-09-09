@@ -535,8 +535,8 @@ problème en faisant `mvn test` de votre côté.
 
 Il y a deux choses à corriger :
 
-- Un test échoue (vous devez avoir le message
-  `Tests run: 4, Failures: 1, Errors: 0, Skipped: 0`).
+- Un test échoue (vous devez avoir un message ressemblant à
+  `Tests run: 2, Failures: 1, Errors: 0, Skipped: 0`).
   Ouvrez le fichier `ApplicantTest.java` et regardez rapidement son
   contenu. Un commentaire `TODO` vous dit ce qu'il faut corriger :
   faites-le et relancez les tests.
