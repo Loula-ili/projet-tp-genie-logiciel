@@ -91,7 +91,17 @@ email, ce fichier en contient une copie.
     - Nautibus TP105, Nautibus TP107, Nautibus TP108                 : Ryan Horache
     - Nautibus TP109, Nautibus TD116, Nautibus TD124, Nautibus TD126 : Lionel Medini
 
-## CM 3 (mardi 9/9/2025, 14h00, par Lionel Medini) : Coding style, Design patterns (début)
+## TP 3 (mardi 9/9/2025, 15h45) : Outillage (suite)
+
+* Énoncé : continuer [TP2-outils/README.md](TP2-outils/README.md)
+
+* Salles :
+    - Matthieu Moy circule entre les salles
+    - Nautibus TP105, Nautibus TP107, Nautibus TP108 : Abdelhakim Boudraa
+    - Nautibus TP109, Nautibus TP110                 : Ryan Horache
+    - Nautibus TD116, Nautibus TD124, Nautibus TD126 : Lionel Medini
+
+## CM 3 (mardi 9/9/2025, 17h30, par Lionel Medini) : Coding style, Design patterns (début)
 
 ### Coding style
 
@@ -108,17 +118,7 @@ email, ce fichier en contient une copie.
 
 * Vidéo du mercredi 9/9/2020 sur Youtube : [https://youtu.be/9oV0xDSrXes](https://youtu.be/9oV0xDSrXes)
 
-## TP 3 (mardi 9/9/2025, 15h45) : Outillage (suite)
-
-* Énoncé : continuer [TP2-outils/README.md](TP2-outils/README.md)
-
-* Salles :
-    - Matthieu Moy circule entre les salles
-    - Nautibus TP105, Nautibus TP107, Nautibus TP108 : Abdelhakim Boudraa
-    - Nautibus TP109, Nautibus TP110                 : Ryan Horache
-    - Nautibus TD116, Nautibus TD124, Nautibus TD126 : Lionel Medini
-
-## CM 4 (mercredi 10/9/2025, 14h, par Lionel Medini) : Design patterns (suite)
+## CM 4 (vendredi 12/9/2025, 11h30, par Lionel Medini) : Design patterns (suite)
 
 ## TD 1 (mardi 16/9/2025, 14h) : Design patterns
 
