@@ -123,7 +123,8 @@ pas de remonter une note de TP.
 Les projets seront rendus en binômes. La date limite est indiquée sur
 la page d'accueil du cours.
 
-**Ajoutez les utilisateurs @matthieu.moy, @LIONEL.MEDINI avec le niveau de privilège
+**Ajoutez les utilisateurs @matthieu.moy, @LIONEL.MEDINI et
+@ryan.horache avec le niveau de privilège
 "reporter" (ou plus, mais *pas* "guest") à votre projet sur la forge**
 
 Dans la feuille TOMUSS de l'UE « Gestion de projet et Génie Logiciel », indiquez l'URL de votre projet dans la case `URL_Projet` (l'URL doit ressembler à
