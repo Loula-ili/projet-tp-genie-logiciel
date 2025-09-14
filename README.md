@@ -125,10 +125,10 @@ email, ce fichier en contient une copie.
 * [TD1-design-patterns](https://matthieu-moy.fr/cours/mif01/TD1-patterns/TD-design-patterns.html)
 
 * Salles :
-  - Nautibus TD126 : Matthieu Moy
-  - Nautibus TD005 : Abdelhakim Boudraa
-  - Nautibus TD124 : Ryan Horache
-  - Nautibus TD116 : Lionel Medini
+  - Groupe A, Nautibus TD126 : Matthieu Moy
+  - Groupe B, Nautibus TD005 : Abdelhakim Boudraa
+  - Groupe C, Nautibus TD124 : Ryan Horache
+  - Groupe D, Nautibus TD116 : Lionel Medini
 
 ## TP 4 (mardi 16/9/2025, 15h45) : Design patterns & refactoring
 
