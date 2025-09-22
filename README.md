@@ -189,6 +189,10 @@ email, ce fichier en contient une copie.
 
 ## CM 7 (mardi 14/10/2025, 14h) : introduction à l'agilité
 
+### QCM noté en amphi (10 minutes)
+
+Au programme : l'introduction, le cours sur l'outillage, les design patterns (tout ce qui a été vu en CM, TD et TP). Soyez à l'heure !
+
 ### Introduction à l'Agilité
 
 * Vidéo : <a target="_blank" title="Introduction à l'agilité" href="https://myvideo.univ-lyon1.fr/permalink/v126648320fc19hggacu/iframe/"><img src="https://myvideo.univ-lyon1.fr/public/videos/v125f5e59e5038qrz03jom0i42z6ey/thumb_link.png" alt="Introduction à l'agilité"/></a>
@@ -201,12 +205,11 @@ email, ce fichier en contient une copie.
 * [TD2-uc-style/TD-usecase-et-style.pdf](https://matthieu-moy.fr/cours/mif01/TD2-uc-style/TD-usecase-et-style.pdf)
   (corrigé : [TD2-uc-style/TD-usecase-et-style-corrige.pdf](https://matthieu-moy.fr/cours/mif01/TD2-uc-style/TD-usecase-et-style-corrige.pdf))
 
-<!-- * Salles :
-  - Groupe A : Nautibus TD 1, 15h45 : Matthieu Moy
-  - Groupe B : Nautibus TD 2, 15h45 : Mathieu Hilaire
-  - Groupe C : Nautibus TD 3, 15h45 : Lionel Medini
-  - Groupe D : Nautibus TD 1, 11h30 : Matthieu Moy
-  -->
+* Salles :
+  - Groupe A, Nautibus TD126 : Matthieu Moy
+  - Groupe B, Nautibus TD005 : Abdelhakim Boudraa
+  - Groupe C, Nautibus TD124 : Ryan Horache
+  - Groupe D, Nautibus TD116 : Lionel Medini
 
 ## CM 8 (mardi 4/11/2025, 14h) : Agilité (suite)
 
