@@ -9,6 +9,7 @@ import java.util.Map;
 public class Applicant {
     private Map<String, Integer> skills = new HashMap<>();
     private String name;
+    private double average; // nouvelle propriété
 
     /**
      * Get the score for a given skill.
@@ -32,4 +33,6 @@ public class Applicant {
     public void setName(final String name) {
         this.name = name;
     }
+    public double getAverage() { return average; }
+    public void setAverage(double avg) { this.average = avg; }
 }
