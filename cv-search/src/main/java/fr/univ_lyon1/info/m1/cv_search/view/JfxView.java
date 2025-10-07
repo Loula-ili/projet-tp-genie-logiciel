@@ -1,12 +1,9 @@
 package fr.univ_lyon1.info.m1.cv_search.view;
 
-import java.io.File;
 import java.util.List;
+import java.util.function.Consumer;
 
 import fr.univ_lyon1.info.m1.cv_search.model.Applicant;
-import fr.univ_lyon1.info.m1.cv_search.model.ApplicantList;
-import fr.univ_lyon1.info.m1.cv_search.model.ApplicantListBuilder;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -19,20 +16,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-/** JfxView class. */
+/** JfxView class (Vue du pattern MVC). */
 public class JfxView {
     private HBox searchSkillsBox;
     private VBox resultBox;
-    private ComboBox<Strategy> strategyComboBox;
+    private ComboBox<String> strategyComboBox;
 
-    /** Internal interface for selection strategies. */
-    private interface Strategy {
-        boolean select(Applicant a, List<String> skills);
+    // --- callbacks pour le contrôleur ---
+    private Consumer<List<String>> onSearch;
+    private Consumer<Applicant> onAddApplicant;
 
-        String toString(); // for displaying the name in the ComboBox
-    }
-
-    /** Constructs a JfxView instance and sets up the user interface. */
+    /** Constructeur : crée la fenêtre et ses widgets. */
     public JfxView(final Stage stage, final int width, final int height) {
         stage.setTitle("Search for CV");
 
@@ -49,7 +43,7 @@ public class JfxView {
         stage.show();
     }
 
-    /** Widget to add a new skill. */
+    /** Widget pour saisir une nouvelle compétence. */
     private Node createNewSkillWidget() {
         HBox newSkillBox = new HBox();
         Label labelSkill = new Label("Skill:");
@@ -86,112 +80,67 @@ public class JfxView {
         return newSkillBox;
     }
 
-    /** Area to display currently searched skills. */
+    /** Zone affichant les compétences recherchées. */
     private Node createCurrentSearchSkillsWidget() {
         searchSkillsBox = new HBox();
         searchSkillsBox.setSpacing(5);
         return searchSkillsBox;
     }
 
-    /** Area to display search results. */
+    /** Zone affichant les résultats de recherche. */
     private Node createResultsWidget() {
         resultBox = new VBox();
         resultBox.setSpacing(5);
         return resultBox;
     }
 
-    /** ComboBox to choose the selection strategy. */
+    /** Sélecteur de stratégie de recherche. */
     private Node createStrategySelector() {
         strategyComboBox = new ComboBox<>();
-
-        // Strategy: All skills >= 50%
-        strategyComboBox.getItems().add(new Strategy() {
-            @Override
-            public boolean select(final Applicant a, final List<String> skills) {
-                for (String s : skills) {
-                    if (a.getSkill(s) < 50) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-            @Override
-            public String toString() {
-                return "All >= 50%";
-            }
-        });
-
-        // Strategy: All skills >= 60%
-        strategyComboBox.getItems().add(new Strategy() {
-            @Override
-            public boolean select(final Applicant a, final List<String> skills) {
-                for (String s : skills) {
-                    if (a.getSkill(s) < 60) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-            @Override
-            public String toString() {
-                return "All >= 60%";
-            }
-        });
-
-        // Strategy: Average >= 50%
-        strategyComboBox.getItems().add(new Strategy() {
-            @Override
-            public boolean select(final Applicant a, final List<String> skills) {
-                double sum = 0;
-                for (String s : skills) {
-                    sum += a.getSkill(s);
-                }
-                double avg = skills.isEmpty() ? 0 : sum / skills.size();
-                return avg >= 50;
-            }
-
-            @Override
-            public String toString() {
-                return "Average >= 50%";
-            }
-        });
-
+        strategyComboBox.getItems().addAll("All >= 50%", "All >= 60%", "Average >= 50%");
         strategyComboBox.getSelectionModel().selectFirst();
         return strategyComboBox;
     }
 
-    /** Search button with classic EventHandler. */
+    /** Bouton Search relié au contrôleur via callback. */
     private Node createSearchWidget() {
         Button search = new Button("Search");
         search.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(final ActionEvent event) {
-                ApplicantList listApplicants = new ApplicantListBuilder(new File(".")).build();
                 List<String> skills = searchSkillsBox.getChildren().stream()
                         .map(node -> ((Button) node).getText())
                         .toList();
-
-                Strategy strategy = strategyComboBox.getValue();
-
-                resultBox.getChildren().clear();
-                for (Applicant a : listApplicants) {
-                    if (strategy.select(a, skills)) {
-                        // Calculate average score on searched skills
-                        double sum = 0;
-                        for (String s : skills) {
-                            sum += a.getSkill(s);
-                        }
-                        double avg = skills.isEmpty() ? 0 : sum / skills.size();
-
-                        // Display name + average score
-                        resultBox.getChildren().add(
-                                new Label(a.getName() + " - Avg: " + String.format("%.2f", avg)));
-                    }
+                if (onSearch != null) {
+                    onSearch.accept(skills);
                 }
             }
         });
         return search;
+    }
+
+    // ------------------- méthodes accessibles par le contrôleur -------------------
+
+    /** Abonnement du contrôleur au bouton Search. */
+    public void setOnSearch(Consumer<List<String>> handler) {
+        this.onSearch = handler;
+    }
+
+    /** Abonnement du contrôleur à l'ajout de candidat. */
+    public void setOnAddApplicant(Consumer<Applicant> handler) {
+        this.onAddApplicant = handler;
+    }
+
+    /** Mise à jour de l'affichage des candidats. */
+    public void updateApplicantList(List<Applicant> applicants) {
+        resultBox.getChildren().clear();
+        for (Applicant a : applicants) {
+            resultBox.getChildren().add(new Label(a.getName()));
+        }
+    }
+
+    /** Récupère la stratégie sélectionnée par l'utilisateur. */
+    public String getSelectedStrategy() {
+        return strategyComboBox.getValue();
     }
 }
