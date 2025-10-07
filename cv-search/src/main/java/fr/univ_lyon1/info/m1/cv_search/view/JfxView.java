@@ -25,6 +25,13 @@ public class JfxView {
     private Consumer<List<String>> onSearch;
     private Consumer<Applicant> onAddApplicant;
 
+    /**
+     * Crée la vue principale JavaFX.
+     *
+     * @param stage  Fenêtre principale.
+     * @param width  Largeur de la scène.
+     * @param height Hauteur de la scène.
+     */
     public JfxView(final Stage stage, final int width, final int height) {
         stage.setTitle("Search for CV");
 
@@ -40,6 +47,11 @@ public class JfxView {
         stage.show();
     }
 
+    /**
+     * Crée le widget permettant d’ajouter une compétence.
+     *
+     * @return Un conteneur graphique.
+     */
     private Node createNewSkillWidget() {
         HBox newSkillBox = new HBox();
         Label labelSkill = new Label("Skill:");
@@ -50,7 +62,9 @@ public class JfxView {
 
         EventHandler<ActionEvent> skillHandler = event -> {
             String text = textField.getText().strip();
-            if (text.isEmpty()) return;
+            if (text.isEmpty()) {
+                return;
+            }
 
             Button skillBtn = new Button(text);
             searchSkillsBox.getChildren().add(skillBtn);
@@ -65,18 +79,33 @@ public class JfxView {
         return newSkillBox;
     }
 
+    /**
+     * Crée le widget contenant les compétences recherchées.
+     *
+     * @return Un conteneur graphique.
+     */
     private Node createCurrentSearchSkillsWidget() {
         searchSkillsBox = new HBox();
         searchSkillsBox.setSpacing(5);
         return searchSkillsBox;
     }
 
+    /**
+     * Crée le widget affichant les résultats.
+     *
+     * @return Un conteneur graphique.
+     */
     private Node createResultsWidget() {
         resultBox = new VBox();
         resultBox.setSpacing(5);
         return resultBox;
     }
 
+    /**
+     * Crée le sélecteur de stratégie de recherche.
+     *
+     * @return Un ComboBox configuré.
+     */
     private Node createStrategySelector() {
         strategyComboBox = new ComboBox<>();
         strategyComboBox.getItems().addAll("All >= 50%", "All >= 60%", "Average >= 50%");
@@ -84,28 +113,65 @@ public class JfxView {
         return strategyComboBox;
     }
 
+    /**
+     * Crée le bouton de recherche.
+     *
+     * @return Un bouton déclenchant la recherche.
+     */
     private Node createSearchWidget() {
         Button search = new Button("Search");
         search.setOnAction(event -> {
             List<String> skills = searchSkillsBox.getChildren().stream()
                     .map(node -> ((Button) node).getText())
                     .toList();
-            if (onSearch != null) onSearch.accept(skills);
+            if (onSearch != null) {
+                onSearch.accept(skills);
+            }
         });
         return search;
     }
 
-    public void setOnSearch(Consumer<List<String>> handler) { this.onSearch = handler; }
-    public void setOnAddApplicant(Consumer<Applicant> handler) { this.onAddApplicant = handler; }
+    /**
+     * Définit le comportement à exécuter lors d'une recherche.
+     *
+     * @param handler Fonction de callback à exécuter.
+     */
+    public void setOnSearch(final Consumer<List<String>> handler) {
+        this.onSearch = handler;
+    }
 
-    /** Affichage des candidats avec leur moyenne sur les compétences recherchées */
-    public void updateApplicantList(List<Applicant> applicants) {
+    /**
+     * Définit le comportement à exécuter lors de l’ajout d’un candidat.
+     *
+     * @param handler Fonction de callback à exécuter.
+     */
+    public void setOnAddApplicant(final Consumer<Applicant> handler) {
+        this.onAddApplicant = handler;
+    }
+
+    /**
+     * Affiche la liste des candidats avec leur moyenne sur les compétences recherchées.
+     *
+     * @param applicants Liste des candidats à afficher.
+     */
+    public void updateApplicantList(final List<Applicant> applicants) {
         resultBox.getChildren().clear();
         for (Applicant a : applicants) {
-            String text = a.getName() + " - Moyenne: " + String.format("%.2f", a.getAverage()) + "%";
+            String text = String.format(
+                    "%s - Moyenne: %.2f%%",
+                    a.getName(),
+                    a.getAverage()
+            );
             resultBox.getChildren().add(new Label(text));
         }
     }
 
-    public String getSelectedStrategy() { return strategyComboBox.getValue(); }
+    /**
+     * Retourne la stratégie de correspondance sélectionnée.
+     *
+     * @return Nom de la stratégie choisie.
+     */
+    public String getSelectedStrategy() {
+        return strategyComboBox.getValue();
+    }
 }

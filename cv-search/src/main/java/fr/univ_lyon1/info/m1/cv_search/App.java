@@ -6,8 +6,22 @@ import fr.univ_lyon1.info.m1.cv_search.controller.ApplicantController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Point d'entrée principal de l'application CV Search.
+ * <p>
+ * Initialise le modèle, les vues JavaFX et le contrôleur,
+ * puis configure les interactions entre eux selon le pattern MVC.
+ * </p>
+ */
 public class App extends Application {
 
+    /**
+     * Méthode appelée au démarrage de l'application JavaFX.
+     * Initialise le modèle, les vues et le contrôleur.
+     *
+     * @param stage Fenêtre principale.
+     * @throws Exception En cas d'erreur d'initialisation.
+     */
     @Override
     public void start(final Stage stage) throws Exception {
         // 1. Modèle unique et partagé
@@ -33,6 +47,11 @@ public class App extends Application {
         view2.setOnSearch(controller::search);
     }
 
+    /**
+     * Point d'entrée principal du programme.
+     *
+     * @param args Arguments de la ligne de commande.
+     */
     public static void main(final String[] args) {
         Application.launch(args);
     }

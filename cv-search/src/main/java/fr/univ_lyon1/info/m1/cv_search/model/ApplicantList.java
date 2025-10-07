@@ -8,14 +8,16 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Wrapper around {@link List<Applicant>} implementing the observer pattern.
+ * Wrapper autour d'une {@link List} de {@link Applicant} implémentant le pattern Observer.
  */
 public class ApplicantList implements Iterable<Applicant> {
     private final List<Applicant> list = new ArrayList<>();
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     /**
-     * Add an applicant and notify listeners.
+     * Ajoute un candidat et notifie les observateurs.
+     *
+     * @param a Le candidat à ajouter.
      */
     public void add(final Applicant a) {
         List<Applicant> old = new ArrayList<>(list);
@@ -24,7 +26,9 @@ public class ApplicantList implements Iterable<Applicant> {
     }
 
     /**
-     * Get the number of applicants in the list.
+     * Retourne le nombre de candidats dans la liste.
+     *
+     * @return Le nombre total de candidats.
      */
     public int size() {
         return list.size();
@@ -36,7 +40,7 @@ public class ApplicantList implements Iterable<Applicant> {
     }
 
     /**
-     * Clear the list of applicants and notify listeners.
+     * Vide la liste des candidats et notifie les observateurs.
      */
     public void clear() {
         List<Applicant> old = new ArrayList<>(list);
@@ -45,7 +49,9 @@ public class ApplicantList implements Iterable<Applicant> {
     }
 
     /**
-     * Replace the content of the applicant list and notify listeners.
+     * Remplace le contenu de la liste de candidats et notifie les observateurs.
+     *
+     * @param other Nouvelle liste de candidats à copier.
      */
     public void setList(final ApplicantList other) {
         List<Applicant> old = new ArrayList<>(list);
@@ -55,20 +61,33 @@ public class ApplicantList implements Iterable<Applicant> {
     }
 
     /**
-     * Return an unmodifiable copy of the current applicants.
+     * Retourne une copie non modifiable de la liste actuelle de candidats.
+     *
+     * @return Liste non modifiable des candidats.
      */
     public List<Applicant> getList() {
         return Collections.unmodifiableList(list);
     }
 
     // -------------------------------
-    // Observer pattern (listeners)
+    // Pattern Observer (listeners)
     // -------------------------------
-    public void addPropertyChangeListener(PropertyChangeListener l) {
+
+    /**
+     * Ajoute un écouteur aux changements de propriétés de la liste.
+     *
+     * @param l L'écouteur à ajouter.
+     */
+    public void addPropertyChangeListener(final PropertyChangeListener l) {
         pcs.addPropertyChangeListener(l);
     }
 
-    public void removePropertyChangeListener(PropertyChangeListener l) {
+    /**
+     * Supprime un écouteur précédemment ajouté.
+     *
+     * @param l L'écouteur à retirer.
+     */
+    public void removePropertyChangeListener(final PropertyChangeListener l) {
         pcs.removePropertyChangeListener(l);
     }
 }
