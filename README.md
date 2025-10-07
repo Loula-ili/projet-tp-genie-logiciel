@@ -193,6 +193,8 @@ email, ce fichier en contient une copie.
 
 Au programme : l'introduction, le cours sur l'outillage, les design patterns (tout ce qui a été vu en CM, TD et TP). Soyez à l'heure !
 
+Aucun document autorisé (et bien sûr aucun moyen de communication).
+
 ### Introduction à l'Agilité
 
 * Vidéo : <a target="_blank" title="Introduction à l'agilité" href="https://myvideo.univ-lyon1.fr/permalink/v126648320fc19hggacu/iframe/"><img src="https://myvideo.univ-lyon1.fr/public/videos/v125f5e59e5038qrz03jom0i42z6ey/thumb_link.png" alt="Introduction à l'agilité"/></a>
