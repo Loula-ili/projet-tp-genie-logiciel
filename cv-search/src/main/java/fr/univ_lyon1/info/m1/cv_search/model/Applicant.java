@@ -147,4 +147,8 @@ public class Applicant {
         }
         return Math.min(1.0, years / 10.0); // plafonné à 10 ans = 100 %
     }
+    public Map<String, Integer> getSkillsMap() {
+        return new HashMap<>(skills);
+    }
+
 }
