@@ -1,13 +1,12 @@
 package fr.univ_lyon1.info.m1.cv_search.view;
 
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 import fr.univ_lyon1.info.m1.cv_search.model.Applicant;
-import javafx.event.ActionEvent;
+
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,16 +18,26 @@ import javafx.scene.layout.VBox;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
 
-/** Vue JavaFX (pattern MVC). */
+/**
+ * Vue JavaFX pour l'application CV Search (pattern MVC).
+ * Gère l'affichage et les interactions utilisateur.
+ */
 public class JfxView {
-    private VBox searchSkillsBox; // contient HBox pour chaque skill
+
+    private VBox searchSkillsBox;
     private VBox resultBox;
     private ComboBox<String> strategyComboBox;
 
-    // --- callbacks pour le contrôleur ---
-    private BiConsumer<List<String>, String> onSearch; // Accepte skills + stratégie
+    private BiConsumer<List<String>, String> onSearch;
     private Consumer<Applicant> onAddApplicant;
 
+    /**
+     * Initialise la vue principale et configure la fenêtre.
+     *
+     * @param stage fenêtre principale
+     * @param width largeur de la fenêtre
+     * @param height hauteur de la fenêtre
+     */
     public JfxView(final Stage stage, final int width, final int height) {
         stage.setTitle("Search for CV");
 
@@ -46,14 +55,19 @@ public class JfxView {
         stage.show();
     }
 
-    /** Widget pour saisir une nouvelle compétence. */
+    /**
+     * Widget pour saisir une nouvelle compétence.
+     *
+     * @return HBox contenant le champ et le bouton
+     */
     private Node createNewSkillWidget() {
         HBox newSkillBox = new HBox();
         newSkillBox.setSpacing(10);
 
         Label labelSkill = new Label("Skill:");
-        TextField textField = new TextField();
+        final TextField textField = new TextField();
         Button submitButton = new Button("Add skill");
+
         newSkillBox.getChildren().addAll(labelSkill, textField, submitButton);
 
         submitButton.setOnAction(event -> addSkill(textField));
@@ -62,20 +76,26 @@ public class JfxView {
         return newSkillBox;
     }
 
-    /** fonctionnalité 2 : Ajoute une compétence dans la liste avec un bouton pour la supprimer. */
-    private void addSkill(TextField textField) {
-        String skill = textField.getText().trim();
-        if (skill.isEmpty()) return;
+    /**
+     * Ajoute une compétence à la liste et crée un bouton pour la supprimer.
+     *
+     * @param textField champ de texte contenant la compétence
+     */
+    private void addSkill(final TextField textField) {
+        final String skill = textField.getText().trim();
+        if (skill.isEmpty()) {
+            return;
+        }
 
         HBox skillBox = new HBox();
         skillBox.setSpacing(5);
         skillBox.setAlignment(Pos.CENTER_LEFT);
-        skillBox.setStyle("-fx-padding: 2;" +
-                "-fx-border-style: solid inside;" +
-                "-fx-border-width: 1;" +
-                "-fx-border-insets: 2;" +
-                "-fx-border-radius: 5;" +
-                "-fx-border-color: black;");
+        skillBox.setStyle("-fx-padding: 2;"
+                + "-fx-border-style: solid inside;"
+                + "-fx-border-width: 1;"
+                + "-fx-border-insets: 2;"
+                + "-fx-border-radius: 5;"
+                + "-fx-border-color: black;");
 
         Label skillLabel = new Label(skill);
         Button removeBtn = new Button("x");
@@ -88,21 +108,33 @@ public class JfxView {
         textField.requestFocus();
     }
 
-    /** Zone affichant les compétences recherchées. */
+    /**
+     * Zone affichant les compétences recherchées.
+     *
+     * @return VBox contenant les compétences
+     */
     private Node createCurrentSearchSkillsWidget() {
         searchSkillsBox = new VBox();
         searchSkillsBox.setSpacing(5);
         return searchSkillsBox;
     }
 
-    /** fonctionalité 3: Zone affichant les résultats de recherche. */
+    /**
+     * Zone affichant les résultats de recherche.
+     *
+     * @return VBox contenant les résultats
+     */
     private Node createResultsWidget() {
         resultBox = new VBox();
         resultBox.setSpacing(5);
         return resultBox;
     }
 
-    /** Sélecteur de stratégie de recherche. */
+    /**
+     * Sélecteur de stratégie de recherche.
+     *
+     * @return ComboBox des stratégies
+     */
     private Node createStrategySelector() {
         strategyComboBox = new ComboBox<>();
         strategyComboBox.getItems().addAll(
@@ -115,12 +147,16 @@ public class JfxView {
         return strategyComboBox;
     }
 
-    /** Bouton Search relié au contrôleur via callback. */
+    /**
+     * Bouton Search relié au contrôleur via callback.
+     *
+     * @return Node bouton de recherche
+     */
     private Node createSearchWidget() {
         Button search = new Button("Search");
         search.setOnAction(event -> {
-            List<String> skills = searchSkillsBox.getChildren().stream()
-                    .map(node -> ((HBox) node).getChildren().get(0)) // récupère le Label
+            final List<String> skills = searchSkillsBox.getChildren().stream()
+                    .map(node -> ((HBox) node).getChildren().get(0))
                     .map(n -> ((Label) n).getText())
                     .collect(Collectors.toList());
 
@@ -131,28 +167,40 @@ public class JfxView {
         return search;
     }
 
-    // ------------------- Méthodes accessibles par le contrôleur -------------------
-
+    /**
+     * Définit le callback pour la recherche.
+     *
+     * @param handler callback prenant les skills et la stratégie
+     */
     public void setOnSearch(final BiConsumer<List<String>, String> handler) {
         this.onSearch = handler;
     }
 
+    /**
+     * Définit le callback pour ajouter un candidat.
+     *
+     * @param handler callback prenant un applicant
+     */
     public void setOnAddApplicant(final Consumer<Applicant> handler) {
         this.onAddApplicant = handler;
     }
 
-    /** Mise à jour de l'affichage des candidats. */
+    /**
+     * Met à jour l'affichage de la liste des candidats.
+     *
+     * @param applicants liste des candidats
+     */
     public void updateApplicantList(final List<Applicant> applicants) {
         resultBox.getChildren().clear();
 
         if (applicants.isEmpty()) {
-            resultBox.getChildren().add(new Label("Aucun candidat ne correspond à la recherche."));
+            resultBox.getChildren().add(
+                    new Label("Aucun candidat ne correspond à la recherche."));
             return;
         }
 
-        String strategy = getSelectedStrategy();
+        final String strategy = getSelectedStrategy();
 
-        // fonctionnalité 4:  Tri décroissant par moyenne si stratégie Average
         List<Applicant> sorted = applicants;
         if ("Average >= 50%".equals(strategy)) {
             sorted = applicants.stream()
@@ -160,20 +208,28 @@ public class JfxView {
                     .collect(Collectors.toList());
         }
 
-        for (Applicant a : sorted) {
-            String text;
+        for (final Applicant a : sorted) {
+            final String text;
             if ("Average >= 50%".equals(strategy)) {
-                text = String.format("%-20s — Moyenne: %.1f", a.getName(), a.getAverage());
+                text = String.format("%-20s — Moyenne: %.1f",
+                        a.getName(),
+                        a.getAverage());
             } else {
-                text = a.getName() + " — Compétences: " +
-                        a.getSkillsMap().entrySet().stream()
-                                .map(entry -> entry.getKey() + ": " + entry.getValue())
-                                .collect(Collectors.joining(", "));
+                text = a.getName()
+                        + " — Compétences: "
+                        + a.getSkillsMap().entrySet().stream()
+                        .map(entry -> entry.getKey() + ": " + entry.getValue())
+                        .collect(Collectors.joining(", "));
             }
             resultBox.getChildren().add(new Label(text));
         }
     }
 
+    /**
+     * Retourne la stratégie sélectionnée.
+     *
+     * @return stratégie choisie
+     */
     public String getSelectedStrategy() {
         return strategyComboBox.getValue();
     }
