@@ -8,49 +8,39 @@ import javafx.stage.Stage;
 
 /**
  * Point d'entrée principal de l'application CV Search.
- * <p>
- * Initialise le modèle, les vues JavaFX et le contrôleur,
- * puis configure les interactions entre eux selon le pattern MVC.
- * </p>
+ * Initialise le modèle, les vues JavaFX et le contrôleur (pattern MVC).
  */
 public class App extends Application {
 
-    /**
-     * Méthode appelée au démarrage de l'application JavaFX.
-     * Initialise le modèle, les vues et le contrôleur.
-     *
-     * @param stage Fenêtre principale.
-     * @throws Exception En cas d'erreur d'initialisation.
-     */
     @Override
     public void start(final Stage stage) throws Exception {
-        // 1. Modèle unique et partagé
+        // Modèle unique et partagé
         ApplicantList model = new ApplicantList();
 
-        // 2. Deux vues, liées au même modèle
+        //  Deux vues liées au même modèle
         JfxView view1 = new JfxView(stage, 600, 600);
         JfxView view2 = new JfxView(new Stage(), 400, 400);
 
-        // 3. Contrôleur lié au modèle
+        //  Contrôleur
         ApplicantController controller = new ApplicantController(model);
 
-        // 4. Synchronisation automatique : toutes les vues écoutent le modèle
+        // Synchronisation automatique : mise à jour des vues quand le modèle change
         model.addPropertyChangeListener(evt -> {
             view1.updateApplicantList(model.getList());
             view2.updateApplicantList(model.getList());
         });
 
-        // 5. Actions des vues → passent par le modèle / contrôleur
+        //  Connexion des actions de la vue au contrôleur
         view1.setOnAddApplicant(controller::addApplicant);
         view2.setOnAddApplicant(controller::addApplicant);
-        view1.setOnSearch(controller::search);
-        view2.setOnSearch(controller::search);
+
+        // transmettre aussi la stratégie choisie
+        view1.setOnSearch((skills, strategy) -> controller.search(skills, strategy));
+        view2.setOnSearch((skills, strategy) -> controller.search(skills, strategy));
     }
 
     /**
      * Point d'entrée principal du programme.
-     *
-     * @param args Arguments de la ligne de commande.
      */
     public static void main(final String[] args) {
         Application.launch(args);

@@ -3,6 +3,7 @@ package fr.univ_lyon1.info.m1.cv_search.model;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.Map;
 
 import org.yaml.snakeyaml.Yaml;
@@ -35,6 +36,7 @@ public class ApplicantBuilder {
         Applicant a = new Applicant();
         Yaml yaml = new Yaml();
         Map<String, Object> map;
+
         try {
             map = yaml.load(new FileInputStream(file));
         } catch (FileNotFoundException e) {
@@ -42,16 +44,36 @@ public class ApplicantBuilder {
             throw new Error(e);
         }
 
+        // 🔹 Nom
         a.setName((String) map.get("name"));
 
-        // Cast may fail if the Yaml is incorrect. Ideally we should provide
-        // clean error messages.
+        // 🔹 Compétences
         @SuppressWarnings("unchecked")
         Map<String, Integer> skills = (Map<String, Integer>) map.get("skills");
+        if (skills != null) {
+            for (Map.Entry<String, Integer> entry : skills.entrySet()) {
+                a.setSkill(entry.getKey(), entry.getValue());
+            }
+        }
 
-        for (String skill : skills.keySet()) {
-            Integer value = skills.get(skill);
-            a.setSkill(skill, value);
+        // 🔹 Expériences professionnelles
+        @SuppressWarnings("unchecked")
+        Map<String, Map<String, Object>> experiences =
+                (Map<String, Map<String, Object>>) map.get("experience");
+
+        if (experiences != null) {
+            for (Map.Entry<String, Map<String, Object>> entry : experiences.entrySet()) {
+                String company = entry.getKey();
+                Map<String, Object> expData = entry.getValue();
+
+                int start = (int) expData.get("start");
+                int end = (int) expData.get("end");
+
+                @SuppressWarnings("unchecked")
+                List<String> keywords = (List<String>) expData.get("keywords");
+
+                a.addExperience(company, start, end, keywords);
+            }
         }
 
         return a;
