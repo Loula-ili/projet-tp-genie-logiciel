@@ -62,7 +62,7 @@ public class JfxView {
         return newSkillBox;
     }
 
-    /** Ajoute une compétence dans la liste avec un bouton pour la supprimer. */
+    /** fonctionnalité 2 : Ajoute une compétence dans la liste avec un bouton pour la supprimer. */
     private void addSkill(TextField textField) {
         String skill = textField.getText().trim();
         if (skill.isEmpty()) return;
@@ -95,7 +95,7 @@ public class JfxView {
         return searchSkillsBox;
     }
 
-    /** Zone affichant les résultats de recherche. */
+    /** fonctionalité 3: Zone affichant les résultats de recherche. */
     private Node createResultsWidget() {
         resultBox = new VBox();
         resultBox.setSpacing(5);
@@ -152,7 +152,7 @@ public class JfxView {
 
         String strategy = getSelectedStrategy();
 
-        // Tri décroissant par moyenne si stratégie Average
+        // fonctionnalité 4:  Tri décroissant par moyenne si stratégie Average
         List<Applicant> sorted = applicants;
         if ("Average >= 50%".equals(strategy)) {
             sorted = applicants.stream()
