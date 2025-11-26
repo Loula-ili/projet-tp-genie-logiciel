@@ -97,9 +97,8 @@ public class ShortlistView {
             });
         });
 
-        headerBox.getChildren().addAll(title, countLabel, spacer, exportCsvBtn, exportJsonBtn, clearBtn);
-
-        // Content area
+        headerBox.getChildren().addAll(title, countLabel, spacer, exportCsvBtn,
+                exportJsonBtn, clearBtn); // Content area
         contentBox.setPadding(new Insets(10));
         contentBox.setStyle("-fx-background-color: #f7fafc;");
 

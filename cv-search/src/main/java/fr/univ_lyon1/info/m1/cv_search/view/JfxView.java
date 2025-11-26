@@ -52,6 +52,13 @@ public class JfxView {
     private Runnable onTrainRanker;
     private Runnable onApplyRanker;
 
+    /**
+     * Constructeur de la vue JavaFX.
+     * 
+     * @param stage  La fenêtre principale
+     * @param width  Largeur de la fenêtre
+     * @param height Hauteur de la fenêtre
+     */
     public JfxView(final Stage stage, final int width, final int height) {
         stage.setTitle("🔍 CV Search - Application Professionnelle");
 
@@ -144,7 +151,8 @@ public class JfxView {
         skillBox.setSpacing(5);
         skillBox.setAlignment(Pos.CENTER_LEFT);
         skillBox.setStyle(
-                "-fx-padding: 4; -fx-border-style: solid inside; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: black;");
+                "-fx-padding: 4; -fx-border-style: solid inside; "
+                        + "-fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: black;");
 
         Label skillLabel = new Label(skill);
         Button removeBtn = new Button("x");
@@ -161,7 +169,8 @@ public class JfxView {
         searchSkillsBox = new VBox();
         searchSkillsBox.setSpacing(5);
         searchSkillsBox.setPadding(new Insets(5));
-        searchSkillsBox.setStyle("-fx-background-color: #f8f8f8; -fx-border-color: #ddd; -fx-border-radius: 4;");
+        searchSkillsBox.setStyle("-fx-background-color: #f8f8f8; "
+                + "-fx-border-color: #ddd; -fx-border-radius: 4;");
         return searchSkillsBox;
     }
 
@@ -227,6 +236,11 @@ public class JfxView {
         this.onApplyRanker = handler;
     }
 
+    /**
+     * Met à jour la liste des candidats affichés.
+     * 
+     * @param applicants Liste des candidats à afficher
+     */
     public void updateApplicantList(final List<Applicant> applicants) {
         this.currentApplicants = applicants;
         resultBox.getChildren().clear();
@@ -267,7 +281,8 @@ public class JfxView {
                 Region spacer = new Region();
                 HBox.setHgrow(spacer, Priority.ALWAYS);
 
-                Button addBtn = new Button(shortlist.contains(a) ? "✓ Dans shortlist" : "+ Shortlist");
+                Button addBtn = new Button(
+                        shortlist.contains(a) ? "✓ Dans shortlist" : "+ Shortlist");
                 addBtn.getStyleClass().addAll("button",
                         shortlist.contains(a) ? "success" : "");
                 addBtn.setOnAction(e -> {

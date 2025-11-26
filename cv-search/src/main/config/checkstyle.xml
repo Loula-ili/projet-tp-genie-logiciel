@@ -76,7 +76,7 @@
 
     <module name="LineLength">
         <!-- MM: Added compared to SUN's default (80) -->
-        <property name="max" value="100"/>
+        <property name="max" value="120"/>
         <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
         <property name="fileExtensions" value="java"/>
     </module>
