@@ -1,0 +1,21 @@
+name: Sophie Martin
+skills:
+  python: 65
+  java: 55
+  javascript: 75
+  angular: 80
+  css: 90
+experience:
+  Startup XYZ:
+    start: 2022
+    end: 2024
+    keywords:
+      - javascript
+      - angular
+      - css
+  Freelance:
+    start: 2024
+    end: 2025
+    keywords:
+      - python
+      - javascript

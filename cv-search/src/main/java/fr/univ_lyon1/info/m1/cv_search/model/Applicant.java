@@ -6,127 +6,122 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Représente un candidat possédant un nom, une liste de compétences
- * et des expériences professionnelles.
+ * Représente un candidat possédant un nom, une map de compétences et des expériences.
  */
 public class Applicant {
-    private Map<String, Integer> skills = new HashMap<>();
+
+    private final Map<String, Integer> skills = new HashMap<>();
     private String name;
-    private double average; // moyenne des compétences
+    private double average; // moyenne (0..100)
     private double totalScore = 0;
-    private List<Experience> experiences = new ArrayList<>();
+    private final List<Experience> experiences = new ArrayList<>();
 
-    /**
-     * Retourne le score total combiné du candidat.
-     *
-     * @return Score global combiné.
-     */
-    public double getTotalScore() {
-        return totalScore;
+    public Applicant() {
+        // constructeur par défaut
     }
 
-    /**
-     * Définit le score total combiné du candidat.
-     *
-     * @param totalScore Score à enregistrer.
-     */
-    public void setTotalScore(final double totalScore) {
-        this.totalScore = totalScore;
+    public Applicant(final String name) {
+        this.name = name;
     }
 
+    // ----- Skills -----
+
     /**
-     * Retourne le score associé à une compétence donnée.
-     *
-     * @param skillName Nom de la compétence.
-     * @return Score ou 0 si absent.
+     * Retourne le score d'une compétence (recherche insensible à la casse).
+     * @param skillName nom de la compétence
+     * @return score 0..100 si présent, sinon 0
      */
     public int getSkill(final String skillName) {
-        return skills.getOrDefault(skillName, 0);
+        if (skillName == null) return 0;
+        String normalized = skillName.trim().toLowerCase();
+        for (Map.Entry<String, Integer> e : skills.entrySet()) {
+            if (e.getKey().trim().toLowerCase().equals(normalized)) {
+                return e.getValue();
+            }
+        }
+        return 0;
     }
 
     /**
-     * Ajoute une compétence et son score.
-     *
-     * @param skillName Nom de la compétence.
-     * @param value     Score associé.
+     * Ajoute ou met à jour une compétence.
+     * @param skillName nom
+     * @param value score 0..100
      */
     public void setSkill(final String skillName, final int value) {
-        skills.put(skillName, value);
+        if (skillName == null) return;
+        String key = skillName.trim();
+        int val = Math.max(0, Math.min(100, value));
+        skills.put(key, val);
+        recomputeAggregateScores();
     }
 
-    /**
-     * Retourne le nom du candidat.
-     *
-     * @return Nom.
-     */
+    public Map<String, Integer> getSkillsMap() {
+        return new HashMap<>(skills);
+    }
+
+    // ----- Name -----
+
     public String getName() {
         return name;
     }
 
-    /**
-     * Définit le nom du candidat.
-     *
-     * @param name Nom du candidat.
-     */
     public void setName(final String name) {
         this.name = name;
     }
 
-    /**
-     * Retourne la moyenne des compétences.
-     *
-     * @return Moyenne.
-     */
+    // ----- Average / TotalScore -----
+
     public double getAverage() {
         return average;
     }
 
-    /**
-     * Définit la moyenne des compétences.
-     *
-     * @param avg Moyenne à définir.
-     */
     public void setAverage(final double avg) {
         this.average = avg;
     }
 
-    /**
-     * Ajoute une expérience professionnelle au profil du candidat.
-     *
-     * @param company  Nom de l'entreprise.
-     * @param start    Année de début.
-     * @param end      Année de fin.
-     * @param keywords Liste des compétences pratiquées.
-     */
-    public void addExperience(final String company, final int start,
-                              final int end, final List<String> keywords) {
-        experiences.add(new Experience(company, start, end, keywords));
+    public double getTotalScore() {
+        return totalScore;
     }
 
-    /**
-     * Retourne la liste des expériences du candidat.
-     *
-     * @return Liste des expériences.
-     */
+    public void setTotalScore(final double totalScore) {
+        this.totalScore = totalScore;
+    }
+
+    private void recomputeAggregateScores() {
+        if (skills.isEmpty()) {
+            this.average = 0;
+            this.totalScore = 0;
+            return;
+        }
+        double sum = 0;
+        for (int v : skills.values()) sum += v;
+        this.average = sum / skills.size();
+        this.totalScore = sum;
+    }
+
+    // ----- Experiences -----
+
+    public void addExperience(final String company, final int startYear,
+                              final int endYear, final List<String> keywords) {
+        experiences.add(new Experience(company, startYear, endYear, keywords));
+    }
+
     public List<Experience> getExperiences() {
-        return experiences;
+        return new ArrayList<>(experiences);
     }
 
     /**
-     * Calcule le nombre total d'années d'expérience pour une compétence donnée.
-     *
-     * @param skill Compétence recherchée.
-     * @return Durée totale en années.
+     * Nombre total d'années d'expérience pour une compétence (heuristique).
      */
     public int getExperienceYearsForSkill(final String skill) {
-        int total = 0;
+        if (skill == null) return 0;
         String normalized = skill.trim().toLowerCase();
-
+        int total = 0;
         for (Experience e : experiences) {
             for (String kw : e.getKeywords()) {
-                if (kw.trim().toLowerCase().equals(normalized)) {
+                if (kw != null && kw.trim().toLowerCase().equals(normalized)) {
                     total += e.getDuration();
-                    break; // On ne compte qu'une fois par expérience.
+                    break;
                 }
             }
         }
@@ -134,21 +129,11 @@ public class Applicant {
     }
 
     /**
-     * Calcule un score d'expérience normalisé entre 0 et 1.
-     * (Exemple : 10 ans = 1.0 = 100 %)
-     *
-     * @param skill Compétence à évaluer.
-     * @return Score d'expérience (max 1.0).
+     * Score d'expérience normalisé entre 0 et 1 (10 ans -> 1.0).
      */
     public double getExperienceScore(final String skill) {
         int years = getExperienceYearsForSkill(skill);
-        if (years == 0) {
-            return 0.0;
-        }
-        return Math.min(1.0, years / 10.0); // plafonné à 10 ans = 100 %
+        if (years <= 0) return 0.0;
+        return Math.min(1.0, years / 10.0);
     }
-    public Map<String, Integer> getSkillsMap() {
-        return new HashMap<>(skills);
-    }
-
 }

@@ -16,31 +16,56 @@
         <javadoc.version>3.7.0</javadoc.version>
         <project.mainclass>fr.univ_lyon1.info.m1.cv_search.App</project.mainclass>
     </properties>
+
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
+        <!-- Tests -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.12.2</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest-all -->
+
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
             <version>3.0</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- JavaFX -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>23.0.2</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
+
+        <!-- YAML -->
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>2.4</version>
+        </dependency>
+
+        <!-- ✅ PDFBox (lecture, écriture et extraction de texte depuis les PDF) -->
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>2.0.30</version>
+        </dependency>
+
+        <!-- ✅ FontBox (nécessaire pour PDFBox) -->
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>fontbox</artifactId>
+            <version>2.0.30</version>
+        </dependency>
+
+        <!-- ✅ Commons Logging (utilisé par PDFBox) -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
         </dependency>
     </dependencies>
 
@@ -51,10 +76,6 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${javadoc.version}</version>
                 <configuration>
-                    <!-- https://github.com/talsma-ict/umldoclet/blob/develop/usage.md -->
-                    <!-- For some reason, the doclet's configuration needs to be repeated
-                    here in addition to javadoc's plugin config, so that "mvn site"
-                    generates UML diagrams. -->
                     <doclet>nl.talsmasoftware.umldoclet.UMLDoclet</doclet>
                     <docletArtifact>
                         <groupId>nl.talsmasoftware</groupId>
@@ -70,7 +91,6 @@
                 <reportSets>
                     <reportSet>
                         <reports>
-                            <!-- select non-aggregate reports -->
                             <report>report</report>
                         </reports>
                     </reportSet>
@@ -81,22 +101,17 @@
 
     <build>
         <plugins>
-            <!-- Coverage of testsuite -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.12</version>
                 <executions>
-                    <!--first
-                    execution : for preparing JaCoCo runtime agent-->
                     <execution>
                         <id>prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
-                    <!--second
-                    execution : for creating code coverage reports-->
                     <execution>
                         <id>report</id>
                         <phase>test</phase>
@@ -106,15 +121,12 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Javadoc with UML diagrams through PlantUML -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${javadoc.version}</version>
-                <!-- Configuration applicable to "mvn javadoc:javadoc",
-                there's another section below to make "mvn site" work too. -->
                 <configuration>
-                    <!-- https://github.com/talsma-ict/umldoclet/blob/develop/usage.md -->
                     <doclet>nl.talsmasoftware.umldoclet.UMLDoclet</doclet>
                     <docletArtifact>
                         <groupId>nl.talsmasoftware</groupId>
@@ -123,6 +135,7 @@
                     </docletArtifact>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
@@ -131,6 +144,7 @@
                     <mainClass>${project.mainclass}</mainClass>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -140,6 +154,7 @@
                     <target>21</target>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -155,6 +170,7 @@
                     <mainClass>${project.mainclass}</mainClass>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -169,6 +185,7 @@
                     </archive>
                 </configuration>
             </plugin>
+
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.7.1</version>
@@ -184,23 +201,22 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
-                        <phase>package</phase> <!-- bind to the packaging phase -->
+                        <id>make-assembly</id>
+                        <phase>package</phase>
                         <goals>
                             <goal>single</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
-                <!-- https://maven.apache.org/plugins/maven-checkstyle-plugin/usage.html -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.6.0</version>
                 <configuration>
                     <configLocation>src/main/config/checkstyle.xml</configLocation>
                     <consoleOutput>true</consoleOutput>
-                    <!-- mvn test fails for any warning or error -->
                     <failsOnError>true</failsOnError>
                     <violationSeverity>warning</violationSeverity>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
@@ -223,24 +239,18 @@
                 </dependencies>
             </plugin>
 
-            <!-- Here by default, but not necessarily with the right version.
-                https://dzone.com/articles/why-your-junit-5-tests-are-not-running-under-maven
-            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.3</version>
             </plugin>
-            <!-- Plugins are activated by default, but Maven picks more or less arbitrarily the
-            version number, and happens to pick a broken configuration at least on my machine.
-                See e.g.
-            https://stackoverflow.com/questions/51091539/maven-site-plugins-3-3-java-lang-classnotfoundexception-org-apache-maven-doxia
-            -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
                 <version>3.9.0</version>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>

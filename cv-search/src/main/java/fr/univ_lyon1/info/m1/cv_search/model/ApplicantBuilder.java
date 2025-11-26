@@ -44,6 +44,12 @@ public class ApplicantBuilder {
             throw new Error(e);
         }
 
+        // Vérification que le fichier YAML est valide
+        if (map == null) {
+            System.err.println("Warning: Invalid YAML file: " + file.getName());
+            return null;
+        }
+
         // 🔹 Nom
         a.setName((String) map.get("name"));
 
@@ -58,8 +64,7 @@ public class ApplicantBuilder {
 
         // 🔹 Expériences professionnelles
         @SuppressWarnings("unchecked")
-        Map<String, Map<String, Object>> experiences =
-                (Map<String, Map<String, Object>>) map.get("experience");
+        Map<String, Map<String, Object>> experiences = (Map<String, Map<String, Object>>) map.get("experience");
 
         if (experiences != null) {
             for (Map.Entry<String, Map<String, Object>> entry : experiences.entrySet()) {

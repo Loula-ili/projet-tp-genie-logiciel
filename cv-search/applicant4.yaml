@@ -1,0 +1,22 @@
+name: Marie Dupont
+skills:
+  python: 95
+  javascript: 85
+  java: 70
+  react: 90
+  docker: 80
+experience:
+  Amazon:
+    start: 2018
+    end: 2022
+    keywords:
+      - python
+      - docker
+      - javascript
+  Spotify:
+    start: 2022
+    end: 2025
+    keywords:
+      - react
+      - javascript
+      - python

@@ -1,0 +1,28 @@
+name: Ahmed Hassan
+skills:
+  java: 98
+  spring: 95
+  kubernetes: 85
+  docker: 90
+  c++: 75
+experience:
+  Oracle:
+    start: 2010
+    end: 2015
+    keywords:
+      - java
+      - c++
+  RedHat:
+    start: 2015
+    end: 2020
+    keywords:
+      - java
+      - kubernetes
+      - docker
+  Netflix:
+    start: 2020
+    end: 2025
+    keywords:
+      - java
+      - spring
+      - kubernetes
