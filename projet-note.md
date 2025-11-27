@@ -123,10 +123,11 @@ pas de remonter une note de TP.
 Les projets seront rendus en binômes. La date limite est indiquée sur
 la page d'accueil du cours.
 
-**Ajoutez les utilisateurs @matthieu.moy, @LIONEL.MEDINI avec le niveau de privilège
+**Ajoutez les utilisateurs @matthieu.moy, @LIONEL.MEDINI et
+@ryan.horache avec le niveau de privilège
 "reporter" (ou plus, mais *pas* "guest") à votre projet sur la forge**
 
-Dans la feuille TOMUSS M1 Informatique, indiquez l'URL de votre projet dans la case URL_Projet_MIF01 (l'URL doit ressembler à
+Dans la feuille TOMUSS de l'UE « Gestion de projet et Génie Logiciel », indiquez l'URL de votre projet dans la case `URL_Projet` (l'URL doit ressembler à
 `https://forge.univ-lyon1.fr/<login>/mif01`). Il faut impérativement
 **que la commande `git clone <url>` fonctionne, et que cette commande récupère la dernière version de votre projet.**
 Autrement dit la branche par défaut doit contenir la dernière version du projet si vous avez
@@ -143,7 +144,7 @@ Votre dépôt sur la Forge devra contenir :
 - le rapport en PDF (6 pages maximum, format libre. La limitation de pages est indicative, si vous avez vraiment besoin de plus vous pouvez dépasser un peu, mais restez raisonnables et concis), dans un fichier qui doit impérativement s'appeler `rapport.pdf` à la racine du dépôt Git.
 
 <!-- 
-Rendu : présence des bons fichiers (rapport.pdf, microblog/pom.xml, .gitlab-ci.yml) [BAREME: malus de -1 par fichier]
+Rendu : présence des bons fichiers (rapport.pdf, cv-search/pom.xml, .gitlab-ci.yml) [BAREME: malus de -1 par fichier]
 -->
 
 Vous pouvez laisser les autres fichiers et répertoires.
@@ -158,7 +159,7 @@ git grep -h '\[BAREME: [^]]*\]' | sed 's/^[#-]*\s*//' | sort | sed 's/^\(.*\)\[B
 |--------|---------|
 | Malus si retard | Rendu : Champ « URL Projet » rempli et projet disponible avant la deadline  |
 | Malus jusqu'à -5 | Rendu : Malus éventuel pour non-respect des consignes (en plus de la note automatique) comme projet non-clonable, URL mal remplie, etc.  |
-| malus de -1 par fichier | Rendu : présence des bons fichiers (rapport.pdf, microblog/pom.xml, .gitlab-ci.yml)  |
+| malus de -1 par fichier | Rendu : présence des bons fichiers (rapport.pdf, cv-search/pom.xml, .gitlab-ci.yml)  |
 | 1 | Rendu : le programme se lance correctement (mvn exec:java)  |
 | 1 | Rendu : le projet est compilable (mvn compile)  |
 | 2 | Outillage : absence d'erreur avec checkstyle  |
