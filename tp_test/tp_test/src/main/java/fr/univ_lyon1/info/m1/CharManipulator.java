@@ -23,4 +23,16 @@ public class CharManipulator implements ICharManipulator {
         }
         return sb.toString();
     }
+
+    @Override
+    public String removePattern(final String string, final String pattern) {
+        if (pattern.isEmpty()) {
+            return string;
+        }
+        String result = string;
+        while (result.contains(pattern)) {
+            result = result.replace(pattern, "");
+        }
+        return result;
+    }
 }
