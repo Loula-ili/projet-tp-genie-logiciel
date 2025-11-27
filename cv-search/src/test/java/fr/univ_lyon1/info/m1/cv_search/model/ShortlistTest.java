@@ -38,47 +38,43 @@ public class ShortlistTest {
 
     @Test
     void testSingletonPattern() {
-        
+        // Vérifie que getInstance() retourne toujours la même instance (pattern
+        // Singleton)
         Shortlist instance1 = Shortlist.getInstance();
         Shortlist instance2 = Shortlist.getInstance();
 
-        
         assertSame(instance1, instance2, "Singleton pattern verification");
     }
 
     @Test
     void testAddCandidate() {
-        
+        // Teste l'ajout d'un candidat dans la shortlist
+
         assertThat(shortlist.size(), is(0));
 
-        
         shortlist.addCandidate(applicant1);
 
-        
         assertThat(shortlist.size(), is(1));
         assertTrue(shortlist.contains(applicant1));
     }
 
     @Test
     void testRemoveCandidate() {
-        
+        // Teste la suppression d'un candidat de la shortlist
         shortlist.addCandidate(applicant1);
         assertThat(shortlist.size(), is(1));
 
-        
         shortlist.removeCandidate(applicant1);
 
-        
         assertThat(shortlist.size(), is(0));
         assertFalse(shortlist.contains(applicant1));
     }
 
     @Test
     void testAddDuplicateCandidate() {
-        
+        // Vérifie qu'on ne peut pas ajouter deux fois le même candidat
         shortlist.addCandidate(applicant1);
 
-        
         shortlist.addCandidate(applicant1);
 
         // Then - No duplicate allowed
@@ -87,31 +83,28 @@ public class ShortlistTest {
 
     @Test
     void testSetAndGetRating() {
-        
+        // Teste l'attribution et la récupération d'une note pour un candidat
         shortlist.addCandidate(applicant1);
 
-        
         shortlist.setRating(applicant1.getName(), 4);
 
-        
         assertThat(shortlist.getRating(applicant1.getName()), is(4));
     }
 
     @Test
     void testSetAndGetComment() {
-        
+        // Teste l'ajout et la récupération d'un commentaire sur un candidat
         shortlist.addCandidate(applicant1);
 
-        
         shortlist.setComment(applicant1.getName(), "Excellent candidat");
 
-        
         assertThat(shortlist.getComment(applicant1.getName()), is("Excellent candidat"));
     }
 
     @Test
     void testObserverPattern() {
-        
+        // Vérifie que les observateurs sont notifiés quand la shortlist change (pattern
+        // Observer)
         final boolean[] notified = {false};
         PropertyChangeListener listener = new PropertyChangeListener() {
             @Override
@@ -121,23 +114,19 @@ public class ShortlistTest {
         };
         shortlist.addPropertyChangeListener(listener);
 
-        
         shortlist.addCandidate(applicant1);
 
-        
         assertTrue(notified[0], "Observer notification test");
     }
 
     @Test
     void testGetCandidates() {
-        
+        // Vérifie qu'on peut récupérer la liste de tous les candidats
         shortlist.addCandidate(applicant1);
         shortlist.addCandidate(applicant2);
 
-        
         var candidates = shortlist.getCandidates();
 
-        
         assertThat(candidates.size(), is(2));
         assertTrue(candidates.contains(applicant1));
         assertTrue(candidates.contains(applicant2));
@@ -145,15 +134,13 @@ public class ShortlistTest {
 
     @Test
     void testClear() {
-        
+        // Teste que clear() vide complètement la shortlist
         shortlist.addCandidate(applicant1);
         shortlist.addCandidate(applicant2);
         assertThat(shortlist.size(), is(2));
 
-        
         shortlist.clear();
 
-        
         assertThat(shortlist.size(), is(0));
     }
 }
