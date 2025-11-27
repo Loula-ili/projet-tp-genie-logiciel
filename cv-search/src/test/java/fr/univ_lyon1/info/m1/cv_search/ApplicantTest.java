@@ -19,13 +19,13 @@ public class ApplicantTest {
     /** Check that the builder works for a basic Yaml file. */
     @Test
     public void readApplicant() {
-        // Given
+        
         ApplicantBuilder builder = new ApplicantBuilder("applicant1.yaml");
 
-        // When
+        
         Applicant a = builder.build();
 
-        // Then
+        
         assertThat(70, is(a.getSkill("c++")));
         assertThat("John Smith", is(a.getName()));
         
@@ -35,13 +35,13 @@ public class ApplicantTest {
     /** Check that the builder can read several files in the same directory. */
     @Test
     public void readManyApplicant() {
-        // Given
+        
         ApplicantListBuilder builder = new ApplicantListBuilder(new File("."));
 
-        // When
+        
         ApplicantList list = builder.build();
 
-        // Then
+        
         boolean johnFound = false;
         for (Applicant a : list) {
             if (a.getName().equals("John Smith")) {
