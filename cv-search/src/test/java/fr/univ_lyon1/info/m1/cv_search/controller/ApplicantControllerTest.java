@@ -98,4 +98,50 @@ public class ApplicantControllerTest {
         // Le modèle devrait être mis à jour
         assertTrue(model.size() >= 0);
     }
+
+    /**
+     * Test bonus : vérifie le comportement avec des compétences à 0%.
+     * Les candidats ayant 0% dans une compétence ne doivent pas matcher
+     * avec la stratégie "All >= 50%".
+     */
+    @Test
+    void testSearchWithZeroSkillLevel() {
+        // Given : recherche avec la stratégie stricte "All >= 50%"
+        List<String> skills = new ArrayList<>();
+        skills.add("java");
+        
+        // When : recherche avec stratégie "All >= 50%"
+        controller.search(skills, "All >= 50%");
+        
+        // Then : tous les candidats retournés doivent avoir au moins 50% en java
+        for (Applicant a : model) {
+            int javaSkill = a.getSkill("java");
+            assertTrue(javaSkill >= 50, 
+                "Candidat " + a.getName() + " a " + javaSkill + "% en java (devrait être >= 50%)");
+        }
+    }
+
+    /**
+     * Test bonus : vérifie que la stratégie "All >= 60%" est plus stricte que "All >= 50%".
+     * Teste la hiérarchie des stratégies de filtrage.
+     */
+    @Test
+    void testSearchWithStricterStrategy() {
+        // Given : deux recherches avec des seuils différents
+        List<String> skills = new ArrayList<>();
+        skills.add("c++");
+        
+        // When : recherche avec seuil à 50%
+        controller.search(skills, "All >= 50%");
+        int resultsWith50 = model.size();
+        
+        // When : recherche avec seuil à 60% (plus strict)
+        controller.search(skills, "All >= 60%");
+        int resultsWith60 = model.size();
+        
+        // Then : le seuil à 60% doit retourner autant ou moins de résultats
+        assertTrue(resultsWith60 <= resultsWith50,
+            "Stratégie 60% (" + resultsWith60 + ") devrait être <= stratégie 50% (" 
+            + resultsWith50 + ")");
+    }
 }
