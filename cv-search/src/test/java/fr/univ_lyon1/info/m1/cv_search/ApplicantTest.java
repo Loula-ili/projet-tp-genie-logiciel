@@ -83,4 +83,38 @@ public class ApplicantTest {
         // When/Then : test avec espaces uniquement (ne doit pas planter)
         assertThat(0, is(applicant.getSkill("   ")));
     }
+
+    /**
+     * Test bonus : vérifie que setSkill borne correctement les valeurs entre 0 et 100.
+     * Les valeurs négatives doivent être ramenées à 0, les valeurs > 100 à 100.
+     */
+    @Test
+    public void testSetSkillWithBoundaryValues() {
+        // Given : création d'un candidat
+        Applicant applicant = new Applicant("Test Person");
+        
+        // When : ajout d'une compétence avec valeur négative
+        applicant.setSkill("java", -50);
+        
+        // Then : la valeur doit être bornée à 0
+        assertThat(0, is(applicant.getSkill("java")));
+        
+        // When : ajout d'une compétence avec valeur supérieure à 100
+        applicant.setSkill("python", 150);
+        
+        // Then : la valeur doit être bornée à 100
+        assertThat(100, is(applicant.getSkill("python")));
+        
+        // When : ajout d'une compétence avec valeur limite 0
+        applicant.setSkill("c++", 0);
+        
+        // Then : la valeur doit rester à 0
+        assertThat(0, is(applicant.getSkill("c++")));
+        
+        // When : ajout d'une compétence avec valeur limite 100
+        applicant.setSkill("rust", 100);
+        
+        // Then : la valeur doit rester à 100
+        assertThat(100, is(applicant.getSkill("rust")));
+    }
 }
