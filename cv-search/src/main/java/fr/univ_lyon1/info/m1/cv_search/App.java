@@ -37,6 +37,10 @@ public class App extends Application {
         // transmettre aussi la stratégie choisie
         view1.setOnSearch((skills, strategy) -> controller.search(skills, strategy));
         view2.setOnSearch((skills, strategy) -> controller.search(skills, strategy));
+
+        // Connexion de l'import PDF
+        view1.setOnImportPdf(controller::importPdfCv);
+        view2.setOnImportPdf(controller::importPdfCv);
     }
 
     /**

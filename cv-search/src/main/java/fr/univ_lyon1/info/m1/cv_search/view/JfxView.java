@@ -151,11 +151,17 @@ public class JfxView {
         detailedViewCheckbox = new CheckBox("Vue détaillée");
         detailedViewCheckbox.setSelected(true);
 
+        Button importPdfBtn = new Button("Import PDF");
+        importPdfBtn.getStyleClass().add("button");
+        importPdfBtn.setOnAction(e -> importPdfFile(stage));
+
         toolbar.getChildren().addAll(
                 shortlistBtn,
                 new Separator(),
                 exportCsvBtn,
                 exportJsonBtn,
+                new Separator(),
+                importPdfBtn,
                 new Separator(),
                 detailedViewCheckbox);
         return toolbar;
@@ -354,6 +360,24 @@ public class JfxView {
                         a.getName(), a.getAverage(), a.getTotalScore());
                 resultBox.getChildren().add(new Label(text));
             }
+        }
+    }
+
+    private void importPdfFile(final Stage stage) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Importer un CV PDF");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null && onImportPdf != null) {
+            onImportPdf.accept(file);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Import réussi");
+            alert.setHeaderText(null);
+            alert.setContentText("Le CV PDF a été importé avec succès.");
+            alert.showAndWait();
         }
     }
 

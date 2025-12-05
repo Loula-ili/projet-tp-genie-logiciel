@@ -1,12 +1,14 @@
 package fr.univ_lyon1.info.m1.cv_search.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import fr.univ_lyon1.info.m1.cv_search.model.Applicant;
 import fr.univ_lyon1.info.m1.cv_search.model.ApplicantList;
 import fr.univ_lyon1.info.m1.cv_search.model.ApplicantListBuilder;
 import fr.univ_lyon1.info.m1.cv_search.model.MatchingStrategy;
+import fr.univ_lyon1.info.m1.cv_search.model.PdfCvImporter;
 import fr.univ_lyon1.info.m1.cv_search.model.StrategyFactory;
 
 /**
@@ -143,5 +145,21 @@ public class ApplicantController {
      */
     public void addApplicant(final Applicant a) {
         model.add(a);
+    }
+
+    /**
+     * Importe un CV depuis un fichier PDF et l'ajoute au modèle.
+     * 
+     * @param pdfFile Fichier PDF contenant le CV
+     */
+    public void importPdfCv(final File pdfFile) {
+        try {
+            PdfCvImporter importer = new PdfCvImporter();
+            Applicant applicant = importer.importFromPdf(pdfFile);
+            model.add(applicant);
+            System.out.println("CV importé: " + applicant.getName());
+        } catch (IOException e) {
+            System.err.println("Erreur lors de l'import PDF: " + e.getMessage());
+        }
     }
 }
