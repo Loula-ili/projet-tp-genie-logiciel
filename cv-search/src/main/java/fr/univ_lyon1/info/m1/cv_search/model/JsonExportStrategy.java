@@ -4,10 +4,26 @@ import java.util.List;
 
 /**
  * Exporte les candidats au format JSON.
- * Pattern: Strategy (implémentation concrète).
+ * <p>
+ * Génère un fichier JSON structuré contenant pour chaque candidat :
+ * - Son nom
+ * - Sa note moyenne
+ * - Son score total
+ * - Ses compétences avec leurs niveaux
+ * - Ses expériences professionnelles (entreprise, durée, mots-clés)
+ * </p>
+ * 
+ * Pattern: Strategy (implémentation concrète) - définit un algorithme d'export JSON.
  */
 public class JsonExportStrategy implements ExportStrategy {
 
+    /**
+     * Exporte la liste de candidats au format JSON.
+     * Génère une structure JSON bien formatée avec indentation.
+     * 
+     * @param applicants Liste des candidats à exporter.
+     * @return Une chaîne de caractères au format JSON.
+     */
     @Override
     public String export(final List<Applicant> applicants) {
         StringBuilder json = new StringBuilder();

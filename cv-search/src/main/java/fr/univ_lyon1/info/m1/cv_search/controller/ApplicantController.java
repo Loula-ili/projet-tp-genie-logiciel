@@ -6,11 +6,21 @@ import java.util.List;
 import fr.univ_lyon1.info.m1.cv_search.model.Applicant;
 import fr.univ_lyon1.info.m1.cv_search.model.ApplicantList;
 import fr.univ_lyon1.info.m1.cv_search.model.ApplicantListBuilder;
+import fr.univ_lyon1.info.m1.cv_search.model.MatchingStrategy;
+import fr.univ_lyon1.info.m1.cv_search.model.StrategyFactory;
 
 /**
- * Contrôleur MVC reliant le modèle et la vue.
+ * Contrôleur MVC reliant le modèle et la vue dans l'application CV Search.
+ * <p>
+ * Ce contrôleur gère les actions utilisateur (recherche, ajout de candidats)
+ * et met à jour le modèle en conséquence. Il applique les stratégies de filtrage
+ * et calcule les scores combinés (compétences + expérience) pour le classement.
+ * </p>
+ * 
+ * Pattern: MVC (Controller) - coordonne les interactions entre la vue et le modèle.
  */
 public class ApplicantController {
+    /** Le modèle contenant la liste des candidats affichés. */
     private final ApplicantList model;
 
     /**
@@ -84,73 +94,52 @@ public class ApplicantController {
             filtered.add(a);
         }
 
-        // Trie les candidats du meilleur au moins bon selon le totalScore
+        // Trie les candidats du meilleur au moins bon selon le totalScore (score décroissant)
         List<Applicant> sortedList = new ArrayList<>(filtered.getList());
         sortedList.sort(
                 (a1, a2) -> Double.compare(a2.getTotalScore(), a1.getTotalScore())
         );
 
+        // Crée une nouvelle ApplicantList avec les candidats triés
         ApplicantList sortedApplicantList = new ApplicantList();
         for (Applicant a : sortedList) {
             sortedApplicantList.add(a);
         }
 
-        // Met à jour la vue
+        // Met à jour le modèle, ce qui notifie automatiquement toutes les vues observatrices
         model.setList(sortedApplicantList);
     }
 
     /**
-     * Vérifie si un candidat correspond à la stratégie choisie.
+     * Vérifie si un candidat correspond à la stratégie de filtrage choisie.
+     * <p>
+     * Utilise le pattern Strategy pour déléguer la logique de matching
+     * à la stratégie appropriée via la factory.
+     * </p>
      *
      * @param a        Le candidat à évaluer.
      * @param skills   Liste des compétences recherchées.
-     * @param strategy Stratégie de filtrage.
-     * @return true si le candidat correspond à la stratégie.
+     * @param strategyName Nom de la stratégie de filtrage à appliquer.
+     * @return true si le candidat satisfait les critères de la stratégie, false sinon.
      */
     private boolean matches(final Applicant a, final List<String> skills,
-                            final String strategy) {
-        switch (strategy) {
-            case "All >= 50%":
-                for (String s : skills) {
-                    if (a.getSkill(s) < 50) {
-                        return false;
-                    }
-                }
-                return true;
-
-            case "All >= 60%":
-                for (String s : skills) {
-                    if (a.getSkill(s) < 60) {
-                        return false;
-                    }
-                }
-                return true;
-
-            case "Average >= 50%":
-                double sum = 0;
-                for (String s : skills) {
-                    sum += a.getSkill(s);
-                }
-                double avg = sum / skills.size();
-                return avg >= 50;
-
-            case "Max Skill >= 70%":
-                for (String s : skills) {
-                    if (a.getSkill(s) >= 70) {
-                        return true;
-                    }
-                }
-                return false;
-
-            default:
-                return false;
+                            final String strategyName) {
+        MatchingStrategy strategy = StrategyFactory.getStrategy(strategyName);
+        
+        if (strategy == null) {
+            // Stratégie inconnue : rejette le candidat
+            System.err.println("Warning: Unknown strategy '" + strategyName + "'");
+            return false;
         }
+        
+        return strategy.matches(a, skills);
     }
 
     /**
      * Ajoute un candidat au modèle.
+     * Cette action déclenche une notification aux vues observatrices.
      *
-     * @param a Candidat à ajouter.
+     * @param a Candidat à ajouter à la liste.
      */
     public void addApplicant(final Applicant a) {
         model.add(a);

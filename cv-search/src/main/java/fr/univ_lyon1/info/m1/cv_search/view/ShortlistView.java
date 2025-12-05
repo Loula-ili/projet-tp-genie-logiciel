@@ -29,31 +29,46 @@ import javafx.stage.Stage;
 
 /**
  * Vue avancée pour gérer la shortlist (liste de favoris) des candidats.
- * Pattern: Observer (écoute les changements de la Shortlist).
+ * <p>
+ * Cette fenêtre secondaire permet de :
+ * - Visualiser tous les candidats ajoutés aux favoris
+ * - Attribuer des notes (1-5 étoiles) et des commentaires à chaque candidat
+ * - Exporter la shortlist au format CSV ou JSON
+ * - Supprimer des candidats de la liste
+ * </p>
+ * 
+ * Pattern: MVC (View) + Observer - écoute les changements de la Shortlist et se met à jour automatiquement.
  */
 public class ShortlistView {
 
+    /** Fenêtre (stage) de la shortlist. */
     private final Stage stage;
+    
+    /** Conteneur principal affichant les candidats favoris. */
     private final VBox contentBox;
+    
+    /** Instance unique de la shortlist (Singleton). */
     private final Shortlist shortlist;
 
     /**
      * Crée une nouvelle vue de shortlist.
+     * Initialise l'interface graphique et s'abonne aux changements de la shortlist.
      *
-     * @param parentStage La fenêtre parente.
+     * @param parentStage La fenêtre parente de l'application.
      */
     public ShortlistView(final Stage parentStage) {
         this.shortlist = Shortlist.getInstance();
         this.stage = new Stage();
         this.contentBox = new VBox(10);
 
+        // Configuration de la fenêtre modale
         stage.initModality(Modality.NONE);
         stage.initOwner(parentStage);
         stage.setTitle("Shortlist - Candidats Favoris");
 
         setupUI();
 
-        // Observer: mise à jour automatique quand la shortlist change
+        // Pattern Observer : mise à jour automatique quand la shortlist change
         shortlist.addPropertyChangeListener(evt -> updateDisplay());
     }
 

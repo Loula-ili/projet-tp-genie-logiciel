@@ -34,22 +34,57 @@ import javafx.stage.Stage;
 
 /**
  * Vue JavaFX enrichie pour l'application CV Search.
+ * <p>
+ * Cette vue affiche l'interface graphique principale permettant de :
+ * - Ajouter des compétences à rechercher
+ * - Choisir une stratégie de filtrage
+ * - Visualiser les résultats de recherche
+ * - Exporter les résultats (CSV/JSON)
+ * - Gérer une shortlist de candidats favoris
+ * </p>
+ * 
+ * Pattern: MVC (View) + Observer - affiche les données et notifie le contrôleur des actions.
  */
 public class JfxView {
 
+    /** Conteneur vertical affichant les compétences recherchées. */
     private VBox searchSkillsBox;
+    
+    /** Conteneur vertical affichant les résultats de recherche. */
     private VBox resultBox;
+    
+    /** Liste déroulante pour sélectionner la stratégie de filtrage. */
     private ComboBox<String> strategyComboBox;
+    
+    /** Case à cocher pour activer/désactiver la vue détaillée. */
     private CheckBox detailedViewCheckbox;
+    
+    /** Instance unique de la shortlist (liste de favoris). */
     private Shortlist shortlist;
+    
+    /** Vue dédiée à l'affichage de la shortlist. */
     private ShortlistView shortlistView;
+    
+    /** Liste actuelle des candidats affichés. */
     private List<Applicant> currentApplicants;
 
+    // Callbacks pour communiquer avec le contrôleur
+    /** Callback appelé lors d'une recherche (skills, strategy). */
     private BiConsumer<List<String>, String> onSearch;
+    
+    /** Callback appelé lors de l'ajout d'un candidat. */
     private Consumer<Applicant> onAddApplicant;
+    
+    /** Callback pour l'import PDF (non implémenté). */
     private Consumer<File> onImportPdf;
+    
+    /** Callback pour l'import LinkedIn (non implémenté). */
     private Consumer<File> onImportLinkedIn;
+    
+    /** Callback pour l'entraînement du ranker (non implémenté). */
     private Runnable onTrainRanker;
+    
+    /** Callback pour l'application du ranker (non implémenté). */
     private Runnable onApplyRanker;
 
     /**
@@ -187,12 +222,9 @@ public class JfxView {
 
     private Node createStrategySelector() {
         strategyComboBox = new ComboBox<>();
+        // Utilise la factory pour obtenir toutes les stratégies disponibles
         strategyComboBox.getItems().addAll(
-                "All >= 50%",
-                "All >= 60%",
-                "Average >= 50%",
-                "Max Skill >= 70%",
-                "Ranker Score");
+                fr.univ_lyon1.info.m1.cv_search.model.StrategyFactory.getAvailableStrategies());
         strategyComboBox.getSelectionModel().selectFirst();
         return strategyComboBox;
     }
