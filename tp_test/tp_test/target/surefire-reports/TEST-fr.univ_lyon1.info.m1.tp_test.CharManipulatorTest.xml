@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0.043" tests="11" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0.036" tests="11" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -11,7 +11,7 @@
     <property name="java.vm.specification.version" value="25"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="/home/ilicia/.jdks/openjdk-25/lib"/>
-    <property name="sun.java.command" value="/home/ilicia/mif-01-g-logiciel/tp_test/tp_test/target/surefire/surefirebooter4817995300023745279.jar /home/ilicia/mif-01-g-logiciel/tp_test/tp_test/target/surefire 2025-12-04T13-54-57_572-jvmRun1 surefire8333946708326628834tmp surefire_012592617169343382696tmp"/>
+    <property name="sun.java.command" value="/home/ilicia/mif-01-g-logiciel/tp_test/tp_test/target/surefire/surefirebooter11529601776262926865.jar /home/ilicia/mif-01-g-logiciel/tp_test/tp_test/target/surefire 2025-12-05T22-50-19_085-jvmRun1 surefire10438568600394917049tmp surefire_016300917222876114339tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/ilicia/mif-01-g-logiciel/tp_test/tp_test/target/test-classes:/home/ilicia/mif-01-g-logiciel/tp_test/tp_test/target/classes:/home/ilicia/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.2.0/junit-jupiter-engine-5.2.0.jar:/home/ilicia/.m2/repository/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar:/home/ilicia/.m2/repository/org/junit/platform/junit-platform-engine/1.2.0/junit-platform-engine-1.2.0.jar:/home/ilicia/.m2/repository/org/junit/platform/junit-platform-commons/1.2.0/junit-platform-commons-1.2.0.jar:/home/ilicia/.m2/repository/org/opentest4j/opentest4j/1.1.0/opentest4j-1.1.0.jar:/home/ilicia/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.2.0/junit-jupiter-api-5.2.0.jar:/home/ilicia/.m2/repository/org/junit/platform/junit-platform-runner/1.2.0/junit-platform-runner-1.2.0.jar:/home/ilicia/.m2/repository/org/junit/platform/junit-platform-launcher/1.2.0/junit-platform-launcher-1.2.0.jar:/home/ilicia/.m2/repository/org/junit/platform/junit-platform-suite-api/1.2.0/junit-platform-suite-api-1.2.0.jar:/home/ilicia/.m2/repository/junit/junit/4.12/junit-4.12.jar:/home/ilicia/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -26,7 +26,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/home/ilicia/mif-01-g-logiciel/tp_test/tp_test/target/surefire/surefirebooter4817995300023745279.jar"/>
+    <property name="surefire.real.class.path" value="/home/ilicia/mif-01-g-logiciel/tp_test/tp_test/target/surefire/surefirebooter11529601776262926865.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="25+36-3489"/>
     <property name="user.name" value="ilicia"/>
@@ -53,15 +53,15 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="caseWithNumbers" classname="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0.013"/>
-  <testcase name="removePatternNormalCase" classname="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0"/>
-  <testcase name="removePatternNotFound" classname="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0.001"/>
+  <testcase name="caseWithNumbers" classname="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0.008"/>
+  <testcase name="removePatternNormalCase" classname="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0.002"/>
+  <testcase name="removePatternNotFound" classname="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0"/>
   <testcase name="caseNormalString" classname="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0.001"/>
-  <testcase name="orderNormalString" classname="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0.001"/>
-  <testcase name="caseOnlyNumbers" classname="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0"/>
+  <testcase name="orderNormalString" classname="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0"/>
+  <testcase name="caseOnlyNumbers" classname="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0.001"/>
   <testcase name="caseEmptyString" classname="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0.001"/>
-  <testcase name="removePatternMultipleOccurrences" classname="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0"/>
+  <testcase name="removePatternMultipleOccurrences" classname="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0.001"/>
   <testcase name="orderEmptyString" classname="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0.001"/>
-  <testcase name="removePatternEmptyPattern" classname="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0"/>
-  <testcase name="removePatternEmptyString" classname="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0.001"/>
+  <testcase name="removePatternEmptyPattern" classname="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0.001"/>
+  <testcase name="removePatternEmptyString" classname="fr.univ_lyon1.info.m1.tp_test.CharManipulatorTest" time="0"/>
 </testsuite>

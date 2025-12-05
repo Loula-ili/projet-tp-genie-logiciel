@@ -95,7 +95,7 @@ public class JfxView {
      * @param height Hauteur de la fenêtre
      */
     public JfxView(final Stage stage, final int width, final int height) {
-        stage.setTitle("🔍 CV Search - Application Professionnelle");
+        stage.setTitle("CV Search - Application Professionnelle");
 
         this.shortlist = Shortlist.getInstance();
         this.shortlistView = new ShortlistView(stage);
@@ -133,12 +133,12 @@ public class JfxView {
         toolbar.getStyleClass().add("toolbar");
         toolbar.setPadding(new Insets(5));
 
-        Button shortlistBtn = new Button("📋 Shortlist (" + shortlist.size() + ")");
+        Button shortlistBtn = new Button("Shortlist (" + shortlist.size() + ")");
         shortlistBtn.getStyleClass().addAll("button", "success");
         shortlistBtn.setOnAction(e -> shortlistView.show());
 
         // Mise à jour du compteur
-        shortlist.addPropertyChangeListener(evt -> shortlistBtn.setText("📋 Shortlist (" + shortlist.size() + ")"));
+        shortlist.addPropertyChangeListener(evt -> shortlistBtn.setText("Shortlist (" + shortlist.size() + ")"));
 
         Button exportCsvBtn = new Button("Export CSV");
         exportCsvBtn.getStyleClass().add("button");
@@ -314,13 +314,13 @@ public class JfxView {
                 HBox.setHgrow(spacer, Priority.ALWAYS);
 
                 Button addBtn = new Button(
-                        shortlist.contains(a) ? "✓ Dans shortlist" : "+ Shortlist");
+                        shortlist.contains(a) ? "Dans shortlist" : "+ Shortlist");
                 addBtn.getStyleClass().addAll("button",
                         shortlist.contains(a) ? "success" : "");
                 addBtn.setOnAction(e -> {
                     if (!shortlist.contains(a)) {
                         shortlist.addCandidate(a);
-                        addBtn.setText("✓ Dans shortlist");
+                        addBtn.setText("Dans shortlist");
                         addBtn.getStyleClass().add("success");
                     }
                 });

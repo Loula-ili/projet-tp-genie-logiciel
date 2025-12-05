@@ -78,7 +78,7 @@ public class ShortlistView {
         root.getStyleClass().add("root");
 
         // Header
-        Label title = new Label("📋 Shortlist des Candidats");
+        Label title = new Label("Shortlist des Candidats");
         title.getStyleClass().add("title");
 
         HBox headerBox = new HBox(10);
@@ -220,7 +220,7 @@ public class ShortlistView {
 
         for (int i = 1; i <= 5; i++) {
             final int rating = i;
-            Label star = new Label("★");
+            Label star = new Label("*");
             star.setStyle("-fx-font-size: 18px; -fx-cursor: hand;");
 
             if (i <= currentRating) {
