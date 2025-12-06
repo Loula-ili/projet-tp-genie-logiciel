@@ -43,47 +43,48 @@ import javafx.stage.Stage;
  * - Gérer une shortlist de candidats favoris
  * </p>
  * 
- * Pattern: MVC (View) + Observer - affiche les données et notifie le contrôleur des actions.
+ * Pattern: MVC (View) + Observer - affiche les données et notifie le contrôleur
+ * des actions.
  */
 public class JfxView {
 
     /** Conteneur vertical affichant les compétences recherchées. */
     private VBox searchSkillsBox;
-    
+
     /** Conteneur vertical affichant les résultats de recherche. */
     private VBox resultBox;
-    
+
     /** Liste déroulante pour sélectionner la stratégie de filtrage. */
     private ComboBox<String> strategyComboBox;
-    
+
     /** Case à cocher pour activer/désactiver la vue détaillée. */
     private CheckBox detailedViewCheckbox;
-    
+
     /** Instance unique de la shortlist (liste de favoris). */
     private Shortlist shortlist;
-    
+
     /** Vue dédiée à l'affichage de la shortlist. */
     private ShortlistView shortlistView;
-    
+
     /** Liste actuelle des candidats affichés. */
     private List<Applicant> currentApplicants;
 
     // Callbacks pour communiquer avec le contrôleur
     /** Callback appelé lors d'une recherche (skills, strategy). */
     private BiConsumer<List<String>, String> onSearch;
-    
+
     /** Callback appelé lors de l'ajout d'un candidat. */
     private Consumer<Applicant> onAddApplicant;
-    
+
     /** Callback pour l'import PDF (non implémenté). */
     private Consumer<File> onImportPdf;
-    
+
     /** Callback pour l'import LinkedIn (non implémenté). */
     private Consumer<File> onImportLinkedIn;
-    
+
     /** Callback pour l'entraînement du ranker (non implémenté). */
     private Runnable onTrainRanker;
-    
+
     /** Callback pour l'application du ranker (non implémenté). */
     private Runnable onApplyRanker;
 
@@ -104,6 +105,23 @@ public class JfxView {
         root.setSpacing(10);
         root.setPadding(new Insets(10));
         root.getStyleClass().add("root");
+
+        // Ajout de la barre de menu en haut
+        javafx.scene.control.MenuBar menuBar = new javafx.scene.control.MenuBar();
+        javafx.scene.control.Menu menuFichier = new javafx.scene.control.Menu("Fichier");
+
+        javafx.scene.control.MenuItem importerPdf = new javafx.scene.control.MenuItem("Importer PDF");
+        importerPdf.setOnAction(e -> importPdfFile(stage));
+
+        javafx.scene.control.MenuItem exporterCsv = new javafx.scene.control.MenuItem("Exporter CSV");
+        exporterCsv.setOnAction(e -> exportResults(new CsvExportStrategy()));
+
+        javafx.scene.control.MenuItem exporterJson = new javafx.scene.control.MenuItem("Exporter JSON");
+        exporterJson.setOnAction(e -> exportResults(new JsonExportStrategy()));
+
+        menuFichier.getItems().addAll(importerPdf, exporterCsv, exporterJson);
+        menuBar.getMenus().add(menuFichier);
+        root.getChildren().add(menuBar);
 
         root.getChildren().add(createTopToolbar(stage));
         root.getChildren().add(createNewSkillWidget());
@@ -141,7 +159,7 @@ public class JfxView {
         shortlist.addPropertyChangeListener(evt -> shortlistBtn.setText("Shortlist (" + shortlist.size() + ")"));
 
         Button exportCsvBtn = new Button("Export CSV");
-        exportCsvBtn.getStyleClass().add("button");
+        exportCsvBtn.getStyleClass().addAll("button", "danger");
         exportCsvBtn.setOnAction(e -> exportResults(new CsvExportStrategy()));
 
         Button exportJsonBtn = new Button("Export JSON");
