@@ -4,7 +4,8 @@ Mini-projet fil rouge du cours MIF01 : outil de sélection automatique de CV (ca
 
 ## Structure du dépôt
 
-\mif-01-g-logiciel/
+```
+mif-01-g-logiciel/
 ├── cv-search/                   # Application principale (projet Maven)
 │   ├── src/main/java/…
 │   │   ├── App.java             # Point d'entrée JavaFX
@@ -31,28 +32,29 @@ Mini-projet fil rouge du cours MIF01 : outil de sélection automatique de CV (ca
 ├── tp_test/                     # Squelette d'exercice sur les tests
 ├── projet-note.md               # Consignes et barème du projet noté
 └── rapport.pdf                  # Rapport final rendu
-\
+```
+
 ## Fonctionnalités de cv-search
 
 - Chargement de candidatures depuis des fichiers YAML et PDF.
 - **Stratégies de matching** interchangeables (pattern Strategy) :
-  - \AllOver50\, \AllOver60\, \AverageOver50\, \MaxSkillAbove70\, \WeightedExperience\…
+  - `AllOver50`, `AllOver60`, `AverageOver50`, `MaxSkillAbove70`, `WeightedExperience`…
 - **Export** de la shortlist en CSV ou JSON (pattern Strategy + Factory).
 - Interface graphique JavaFX (pattern MVC).
 - Pattern Builder pour la construction des candidats et listes.
 
 ## Lancement
 
-\\ash
+```bash
 cd cv-search
 mvn javafx:run
-\
+```
 ## Tests
 
-\\ash
+```bash
 cd cv-search
 mvn test
-\
+```
 ## Dépendances
 
 - Java 17+, Maven 3.8+
